@@ -1,0 +1,103 @@
+
+/*ใส่ฟ้อน*/
+body {
+    /*background: #fff;*/
+    font-family: 'Sarabun';
+    /*    margin: 0;
+        overflow-x: hidden;*/
+    color: #54667a;
+    font-weight: 300; 
+}
+
+/*เปิด modal แล้วจะแก้บักกินพื้นที่*/
+/*.modal-open .modal{
+    overflow:auto;
+    padding-right:0 !important;
+}*/
+
+/*เปิด modal แล้วจะแก้บักกินพื้นที่*/
+/*body:not(.modal-open){
+    padding-right: 0px !important;
+}*/
+
+/*สี active menu*/
+.sidebar-nav ul li a.active {
+    color: #009efb !important; 
+}
+
+/*ตัวหนังสือติด validation สีแดง*/
+.error{
+    color: red;
+} 
+
+/*ทำกรอบสีแดงใส่ช่อง input*/
+/*.error_put_border{
+    border-color: #dc3545 !important;
+    border-width: 2px !important;
+}*/
+
+/*หัวตารางตัวหนังสือหนา*/
+thead{
+    font-weight: bold;
+}
+
+/*ตารางเอาเส้นหนาออก*/
+.table-bordered thead td, .table-bordered thead th {
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+}
+
+/*หัวข้อทำตัวหนาและขีดเส้นใต้*/
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #54667a;
+    text-decoration: underline;
+}  
+
+/*ทำตัวหนา text บนช่องกรอก*/
+form label{
+    font-weight: bold; 
+}
+
+/*tag b ทำตัวหนา*/
+/*b{
+    font-weight: bold;  
+}*/
+
+/*ทำให้ไม่ตกบรรทัด*/
+/*.nowrap {
+    white-space: nowrap;
+}*/
+
+/*.a_not_active{
+    color: #000000;
+}*/
+
+/* ปุ่ม สีเทา และ กดไม่ได่*/
+/*.isDisabled {
+    cursor: not-allowed !important;
+    opacity: 0.5;
+}*/
+
+
+/* set daterangepicker */
+/*.daterangepicker.single .drp-buttons { 
+    display:block !important; 
+}
+.daterangepicker.single .cancelBtn {
+    color: #fff;
+    background-color: #bd2130;
+    border-color: #b21f2d;
+}*/
+
+
+/*.row_close_use {
+    color: #fff;
+    background-color: #A9A9A9;
+}
+
+.row_block_use {
+    color: #fff;
+    background-color: #DEB887;
+}*/
