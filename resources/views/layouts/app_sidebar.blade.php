@@ -20,10 +20,10 @@
                 <li class="{{ (request()->is("manage_task/*") || request()->is("customer_google_adses/*") || request()->is("receipt/*") || request()->is("receipt_company/*") ? 'active' : '') }}">
                     <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">ระบบการทำงาน</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{ route('manage_task') }}" class="{{ (request()->is("manage_task/*") ? 'active' : '') }}">จัดการงาน</a></li>
-                        <li><a href="{{ route('customer_google_adses') }}" class="{{ (request()->is("customer_google_ads/*") ? 'active' : '') }}">ลูกค้า google ads</a></li>
-                        <li><a href="{{ route('receipt') }}" class="{{ (request()->is("receipt/*") ? 'active' : '') }}">จัดเก็บใบเสร็จลูกค้า</a></li>
-                        <li><a href="{{ route('receipt_company') }}" class="{{ (request()->is("receipt_company/*") ? 'active' : '') }}">จัดเก็บใบเสร็จบริษัท</a></li>
+                        <li><a href="{{ route('manage_task') }}" class="{{ (request()->is("manage_task/*") ? 'active' : '') }}">วางแผนการทำงาน</a></li>
+                        <li><a href="{{ route('customer_google_adses') }}" class="{{ (request()->is("customer_google_ads/*") ? 'active' : '') }}">ตารางลูกค้าลงโฆษณา</a></li>
+                        <li><a href="{{ route('receipt') }}" class="{{ (request()->is("receipt/*") ? 'active' : '') }}">จัดเก็บสลิปเปิดงานลูกค้า</a></li>
+                        <li><a href="{{ route('receipt_company') }}" class="{{ (request()->is("receipt_company/*") ? 'active' : '') }}">จัดเก็บสลิปจ่ายบริษัท</a></li>
                     </ul>
                 </li>  
                 <!--                <li class="{{ (request()->is("report_manage_task/*") || request()->is("report_customer_google_ads/*")  ? 'active' : '') }}">

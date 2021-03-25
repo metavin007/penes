@@ -131,23 +131,23 @@ class CustomerGoogleAdsController extends Controller {
         return \DataTables::of($result)
                         ->addIndexColumn()
                         ->editColumn('service_end_date', function($rec) {
-                            return date('d-m-Y', strtotime($rec->service_end_date));
+                            return DateThai($rec->service_end_date);
                         })
                         ->editColumn('expired_web_date', function($rec) {
-                            return date('d-m-Y', strtotime($rec->expired_web_date));
+                            return DateThai($rec->expired_web_date);
                         })
                         ->editColumn('price', function($rec) {
-                            return number_format($rec->price, 2);
+                            return number_format($rec->price);
                         })
                         ->editColumn('manage_ads', function($rec) {
-                            return '<button type="button" class="btn btn-inverse"><a style="color:white;" href="' . $rec->manage_ads . '" target="_blank">จัดการ</a></button>';
+                            return '<button type="button" class="btn btn-info"><a style="color:white;" href="' . $rec->manage_ads . '" target="_blank">ดูโฆษณา</a></button>';
                         })
                         ->editColumn('link_web', function($rec) {
                             return '<a href="' . $rec->link_web . '" target="_blank">' . $rec->link_web . '</a>';
                         })
                         ->addColumn('action', function($rec) {
                             $str = '
-                          <button type="button" class="btn btn-edit btn-warning" data-id="' . $rec->id . '">แก้ไข</button>
+                          <button type="button" class="btn btn-edit btn-warning" data-id="' . $rec->id . '">จัดการ</button>
                           <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->name . '">ลบ</button>   
                             ';
                             return $str;

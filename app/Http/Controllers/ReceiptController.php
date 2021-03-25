@@ -150,8 +150,8 @@ class ReceiptController extends Controller {
                         ->editColumn('file', function($rec) {
                             if ($rec->file) {
                                 $str = '
-                          <button type="button" class="btn btn-look_pic btn-info" data-id="' . $rec->id . '">ดูภาพ</button>
-                          <button type="button" class="btn btn-inverse"><a style="color:white;" href="' . asset('uploads/receipt/' . $rec->file) . '" download="">ดาวห์โหลด</a></button>   
+                          <button type="button" class="btn btn-look_pic btn-info" data-id="' . $rec->id . '"><i class="me-2 mdi mdi-eye"></i> ดูภาพ</button>
+                          <button type="button" class="btn btn-info"><a style="color:white;" href="' . asset('uploads/receipt/' . $rec->file) . '" download=""><i class="me-2 mdi mdi-download"></i>ดาวห์โหลด</a></button>   
                             ';
                             } else {
                                 $str = '';
@@ -159,12 +159,12 @@ class ReceiptController extends Controller {
                             return $str;
                         })
                         ->editColumn('receipt_date', function($rec) {
-                            return date('d-m-Y', strtotime($rec->receipt_date));
+                            return DateThai($rec->receipt_date);
                         })
                         ->editColumn('receipt_file', function($rec) {
                             if ($rec->receipt_file) {
                                 $str = '
-                                        <button type="button" class="btn btn-inverse"><a style="color:white;" href="' . asset('uploads/receipt_file/' . $rec->receipt_file) . '" download="">ดาวห์โหลด</a></button>   
+                                        <button type="button" class="btn btn-success" "><a style="color:white;" href="' . asset('uploads/receipt_file/' . $rec->receipt_file) . '" download=""><i class="me-2 mdi mdi-download"></i>โหลดใบเสร็จ </a></button>   
                                     ';
                             } else {
                                 $str = '';
@@ -173,19 +173,25 @@ class ReceiptController extends Controller {
                         })
                         ->editColumn('status', function($rec) {
                             if ($rec->status == 'ขอใบเสร็จ') {
-                                return '<div class="alert-success" role="alert">ขอใบเสร็จ</div>';
+                                return '<div role="alert" style ="color: #0e7b1b ;">ขอใบเสร็จ</div>';
                             } else {
                                 return '';
                             }
                         })
                         ->addColumn('action', function($rec) {
-                            $str = '
+
+                            if ($rec->status == 'ขอใบเสร็จ') {
+                                $str = '<button type="button" class="btn btn-upload btn-outline-success" data-id="' . $rec->id . '"><i class="me-2 mdi mdi-file-pdf"></i> อัพใบเสร็จ</button>';
+                                } else {
+                                $str = '';
+                            }
+                           
+
+                            $str .= '
                           <button type="button" class="btn btn-edit btn-warning" data-id="' . $rec->id . '">แก้ไข</button>
                           <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->name . '">ลบ</button>   
                             ';
-                            if ($rec->status == 'ขอใบเสร็จ') {
-                                $str .= '<button type="button" class="btn btn-upload btn-primary" data-id="' . $rec->id . '">อัพโหลด</button>';
-                            }
+                            
                             return $str;
                         })->rawColumns(['file','receipt_file', 'status', 'action'])->make(true);
     }

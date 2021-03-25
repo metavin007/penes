@@ -4,24 +4,23 @@
 <style>
     /*จัดการ*/
     .row_status_1{
-/*        color: #fff;
-        background-color: #00b99c;*/
+        color: #e49900;
     }
-    /*รอจ่ายเงิน*/
+    /*แจ้งต่อบริการ*/
     .row_status_2{
-        color: #fff;
-        background-color: orange;
+     color: #f00;
+    background-color: #ffffff;
     }
     /*ชำระแล้ว*/
     .row_status_3{
-        color: #fff;
-        background-color: green;
+    color: #078002;
+    background-color: #ffff;
     }
     /*ไม่ต่อบริการ*/
-    .row_status_4{
-        color: #fff;
-        background-color: gray;
-    }
+    .row_status_4 {
+    color: #716c6c7a;
+   background-color: #eeeeee;
+}
 </style>
 @endsection
 
@@ -41,10 +40,10 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
-                            <h4 class="card-title">ตารางลูกค้า google ads</h4>
+                            <h4 class=""> ตารางลูกค้า Google Ads </h4>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn float-right btn-primary btn-add"> สร้าง</button>
+                            <button class="btn float-right btn-info btn-add btn-lg"> สร้าง</button>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -56,12 +55,13 @@
                                     <td class="text-center">ราคา</td>
                                     <td class="text-center">ชำระล่วงหน้า</td>
                                     <td class="text-center">วันที่สิ้นสุดบริการ</td>
-                                    <td class="text-center">จัดการโฆษณา</td>
                                     <td class="text-center">ข้อมูลติดต่อ</td>
+                                    <td class="text-center">สถานะ</td>
+                                    <td class="text-center">จัดการโฆษณา</td>
+                                    <td class="text-center">จัดการ</td>
                                     <td class="text-center">ชื่อเว๊ป</td>
                                     <td class="text-center">วันหมดอายุเว๊ปไซด์</td>
-                                    <td class="text-center">สถานะ</td>
-                                    <td class="text-center">จัดการ</td>
+                             
                                 </tr>
                             </thead>
                         </table>
@@ -76,7 +76,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">เพิ่ม</h3>
+                <h3 class="text-center" id="myLargeModalLabel">เพิ่มงาน</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form id="FormAdd">
@@ -84,7 +84,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="add_name">ชื่อธุรกิจ</label>
+                                <label for="add_name">ชื่องาน</label>
                                 <input type="text" name="name" id="add_name" class="form-control">
                             </div>
                         </div>
@@ -111,13 +111,13 @@
                                 <input type="text" name="service_end_date" id="add_service_end_date" class="form-control date_time-picker" readonly="">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="add_manage_ads">จัดการโฆษณา</label>
                                 <textarea class="form-control" name="manage_ads" id="add_manage_ads" rows="5"></textarea>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="add_contact">ข้อมูลติดต่อ</label>
                                 <textarea class="form-control" name="contact" id="add_contact" rows="5"></textarea>
@@ -125,13 +125,13 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_link_web">ชื่อเว๊ป</label>
+                                <label for="add_link_web">ชื่อเว็บ</label>
                                 <input type="text" name="link_web" id="add_link_web" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_expired_web_date">วันหมดอายุเว๊ปไซด์</label>
+                                <label for="add_expired_web_date">วันหมดอายุเว็บไซด์</label>
                                 <input type="text" name="expired_web_date" id="add_expired_web_date" class="form-control date_time-picker" readonly="">
                             </div>
                         </div>
@@ -140,8 +140,8 @@
                                 <label for="add_status">สถานะ</label>
                                 <select name="status" id="add_status" class="form-control">
                                     <option value="" selected="">ไม่เลือก</option>
-                                    <option value="จัดการ">จัดการ</option>
-                                    <option value="รอจ่ายเงิน">รอจ่ายเงิน</option>
+                                    <option value="แจ้งเติมเงิน">แจ้งเติมเงิน</option>
+                                    <option value="แจ้งต่อบริการ">แจ้งต่อบริการ</option>
                                     <option value="ชำระแล้ว">ชำระแล้ว</option>
                                     <option value="ไม่ต่อบริการ">ไม่ต่อบริการ</option>
                                 </select>
@@ -162,7 +162,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">แก้ไข</h3>
+                <h3 class="text-center" id="myLargeModalLabel">จัดการงาน</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_id">
@@ -171,7 +171,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="edit_name">ชื่อธุรกิจ</label>
+                                <label for="edit_name">ชื่องาน</label>
                                 <input type="text" name="name" id="edit_name" class="form-control">
                             </div>
                         </div>
@@ -198,13 +198,13 @@
                                 <input type="text" name="service_end_date" id="edit_service_end_date" class="form-control date_time-picker" readonly="">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="edit_manage_ads">จัดการโฆษณา</label>
                                 <textarea class="form-control" name="manage_ads" id="edit_manage_ads" rows="5"></textarea>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="edit_contact">ข้อมูลติดต่อ</label>
                                 <textarea class="form-control" name="contact" id="edit_contact" rows="5"></textarea>
@@ -212,13 +212,13 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="edit_link_web">ชื่อเว๊ป</label>
+                                <label for="edit_link_web">ชื่อเว็บ</label>
                                 <input type="text" name="link_web" id="edit_link_web" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="edit_expired_web_date">วันหมดอายุเว๊ปไซด์</label>
+                                <label for="edit_expired_web_date">วันหมดอายุเว็บไซด์</label>
                                 <input type="text" name="expired_web_date" id="edit_expired_web_date" class="form-control date_time-picker" readonly="">
                             </div>
                         </div>
@@ -227,8 +227,8 @@
                                 <label for="edit_status">สถานะ</label>
                                 <select name="status" id="edit_status" class="form-control">
                                     <option value="" selected="">ไม่เลือก</option>
-                                    <option value="จัดการ">จัดการ</option>
-                                    <option value="รอจ่ายเงิน">รอจ่ายเงิน</option>
+                                    <option value="แจ้งเติมเงิน">แจ้งเติมเงิน</option>
+                                    <option value="แจ้งต่อบริการ">แจ้งต่อบริการ</option>
                                     <option value="ชำระแล้ว">ชำระแล้ว</option>
                                     <option value="ไม่ต่อบริการ">ไม่ต่อบริการ</option>
                                 </select>
@@ -282,17 +282,18 @@
             {"data": "price", "className": "text-right", "orderable": false},
             {"data": "prepay", "className": "text-center", "orderable": false},
             {"data": "service_end_date", "className": "text-center"},
-            {"data": "manage_ads", "className": "text-center", "orderable": false},
             {"data": "contact", "className": "text-right", "orderable": false},
+             {"data": "status", "className": "text-center"},
+             {"data": "manage_ads", "className": "text-center", "orderable": false},
+            {"data": "action", "className": "action text-center", "orderable": false, "searchable": false},
             {"data": "link_web", "className": "text-center", "orderable": false},
             {"data": "expired_web_date", "className": "text-center"},
-            {"data": "status", "className": "text-center", "orderable": false},
-            {"data": "action", "className": "action text-center", "orderable": false, "searchable": false},
+           
         ], "order": [[4, "asc"]],
         rowCallback: function (row, data, index) {
-            if (data['status'] === 'จัดการ') {
+            if (data['status'] === 'แจ้งเติมเงิน') {
                 $(row).addClass('row_status_1');
-            } else if (data['status'] === 'รอจ่ายเงิน') {
+            } else if (data['status'] === 'แจ้งต่อบริการ') {
                 $(row).addClass('row_status_2');
             } else if (data['status'] === 'ชำระแล้ว') {
                 $(row).addClass('row_status_3');
@@ -481,7 +482,7 @@
         var name = btn.data('name');
         swal({
             title: "คุณต้องการลบ " + name + " ใช่หรือไม่",
-            text: "หากคุณลบจะไม่สามารถเรียกคืนข้อมูกลับมาได้",
+            text: "ตรวจสอบให้แน่ใจก่อนลบข้อมูล",
             type: 'warning',
             showCancelButton: true,
             confirmButtonClass: 'btn btn-success',

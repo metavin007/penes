@@ -31,12 +31,12 @@
                             <thead>
                                 <tr>
                                     <td class="text-center">ลำดับ</td>
-                                    <td class="text-center">รหัส</td>
-                                    <td class="text-center">ชื่อ</td>
-                                    <td class="text-center">นามสกุล</td>
-                                    <td class="text-center">เบอร์โทร</td>
+                                    <td class="text-center">ชื่อ-นามสกุล</td>
+                                    <td class="text-center">ชื่อเล่น</td>
+                                    <td class="text-center">เบอร์มือถือ</td>
                                     <td class="text-center">อีเมล</td>
                                     <td class="text-center">แผนก</td>
+                                    <td class="text-center">สิทธิผู้ใช้งาน</td>
                                     <td class="text-center">วันที่เพิ่มข้อมูล</td>
                                     <td class="text-center">จัดการ</td>
                                 </tr>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="card-title" id="myLargeModalLabel">เพิ่ม</h3>
@@ -58,61 +58,95 @@
             </div>
             <form id="FormAdd">
                 <div class="modal-body">
+                    <h3 class="card-title text-center" id="myLargeModalLabel">ข้อมูลส่วนตัว</h3>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="add_code">รหัสพนักงาน</label>
+                                <input class="form-control" name="code" id="add_code" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="add_pid">เลขประจำตัวประชาชน</label>
+                                <input class="form-control" name="pid" id="add_pid" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="add_role">สิทธิผู้ใช้งาน</label>
+                                <select name="role" id="add_role" class="form-control">
+                                    <option selected="" disabled="">กรุณาเลือก</option>
+                                    <option value="CEO">CEO</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="General">General</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="add_first_name">ชื่อ</label>
+                                <input class="form-control" name="first_name" id="add_first_name" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="add_last_name">นามสกุล</label>
+                                <input class="form-control" name="last_name" id="add_last_name" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="add_nick_name">ชื่อเล่น</label>
+                                <input class="form-control" name="nick_name" id="add_nick_name" type="text">
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="add_name">รหัส</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
+                            <div class="form-address">
+                                <label for="add_address">ที่อยู่</label>
+                                <textarea class="form-control" name="address" id="add_address"></textarea>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_name">ชื่อ</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
+                                <label for="add_mobile">เบอร์มือถือ</label>
+                                <input class="form-control" name="mobile" id="add_mobile" type="text">
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_name">นามสกุล</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
+                                <label for="add_department">แผนก</label>
+                                <input class="form-control" name="department" id="add_department" type="text">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                    </div>
+                    <h3 class="card-title text-center" id="myLargeModalLabel">เข้าสู่ระบบ</h3>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="edit_description">ที่อยู่</label>
-                                <textarea class="form-control" name="description" id="edit_description" rows="5"></textarea>
+                                <label for="add_email">อีเมล</label>
+                                <input class="form-control" name="email" id="add_email" type="text">
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_name">เบอร์โทร</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
+                                <label for="password">รหัสผ่าน</label>
+                                <input class="form-control" type="password" id="password" name="password">
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_name">อีเมล</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="add_name">รหัสผ่าน</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="add_name">แผนก</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
-                            </div>
-                        </div>
-                        <div class="col-lg-6"></div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="add_name">ยืนยันรหัสผ่าน</label>
-                                <input type="text" name="name" id="add_name" class="form-control" required="">
-                            </div>
+                                <label for="password_confirm">ยืนยันรหัสผ่าน</label>
+                                <input class="form-control" type="password" id="password_confirm" name="password_confirm">
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -126,7 +160,7 @@
 </div>
 
 <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="card-title" id="myLargeModalLabel">แก้ไข</h3>
@@ -135,23 +169,82 @@
             <input type="hidden" id="update_id">
             <form id="FormEdit">
                 <div class="modal-body">
+                    <h3 class="card-title text-center" id="myLargeModalLabel">ข้อมูลส่วนตัว</h3>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="edit_code">รหัสพนักงาน</label>
+                                <input class="form-control" name="code" id="edit_code" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="edit_pid">เลขประจำตัวประชาชน</label>
+                                <input class="form-control" name="pid" id="edit_pid" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="edit_role">สิทธิผู้ใช้งาน</label>
+                                <select name="role" id="edit_role" class="form-control">
+                                    <option selected="" disabled="">กรุณาเลือก</option>
+                                    <option value="CEO">CEO</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="General">General</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="edit_first_name">ชื่อ</label>
+                                <input class="form-control" name="first_name" id="edit_first_name" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="edit_last_name">นามสกุล</label>
+                                <input class="form-control" name="last_name" id="edit_last_name" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="edit_nick_name">ชื่อเล่น</label>
+                                <input class="form-control" name="nick_name" id="edit_nick_name" type="text">
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="edit_text">ชื่อ</label>
-                                <input type="text" name="name" id="edit_name" class="form-control" required="">
+                            <div class="form-address">
+                                <label for="edit_address">ที่อยู่</label>
+                                <textarea class="form-control" name="address" id="edit_address"></textarea>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="edit_description">คำอธิบาย</label>
-                                <textarea class="form-control" name="description" id="edit_description" rows="10"></textarea>
+                                <label for="edit_mobile">เบอร์มือถือ</label>
+                                <input class="form-control" name="mobile" id="edit_mobile" type="text">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="edit_price">ราคา</label>
-                                <input type="number" name="price" id="edit_price" class="form-control text-right" required="">
+                                <label for="edit_department">แผนก</label>
+                                <input class="form-control" name="department" id="edit_department" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="card-title text-center" id="myLargeModalLabel">เข้าสู่ระบบ</h3>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="edit_email">อีเมล</label>
+                                <input class="form-control" name="email" id="edit_email" type="text">
                             </div>
                         </div>
                     </div>
@@ -169,17 +262,17 @@
     <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">เปลี่ยนรหัสผ่าน</h4>
+                <h3 class="card-title" id="myLargeModalLabel">เปลี่ยนรหัสผ่าน</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form id="FormChangePassword">
                 <input type="hidden" id="update_password_id" name="update_id" value="">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-7 col-sm-7">
+                        <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="add_tel">รหัสใหม่</label>
-                                <input data-type_case_sensitive="2" type="password" id="add_new_password" name="password" class="form-control" required value="">
+                                <label for="add_new_password">รหัสใหม่</label>
+                                <input type="password" id="add_new_password" name="password" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-5"></div>
@@ -223,14 +316,14 @@
         },
         "columns": [
             {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
-            {"data": "code", "className": "nowrap"},
-            {"data": "first_name"},
-            {"data": "last_name", "visible": false},
-            {"data": "mobile", "className": "nowrap"},
-            {"data": "email", "className": "nowrap"},
-            {"data": "department.name", "className": "nowrap", "searchable": false},
-            {"data": "created_at", "className": "text-center nowrap"},
-            {"data": "action", "className": "action text-center nowrap", "orderable": false, "searchable": false}
+            {"data": "first_name", "className": "text-center"},
+            {"data": "nick_name", "className": "text-center"},
+            {"data": "mobile", "className": "text-center"},
+            {"data": "email", "className": "text-center"},
+            {"data": "department", "className": "text-center"},
+            {"data": "role", "className": "text-center"},
+            {"data": "created_at", "className": "text-center"},
+            {"data": "action", "className": "action text-center", "orderable": false, "searchable": false}
         ], "order": [[3, "desc"]],
         rowCallback: function (row, data, index) {
 
@@ -246,20 +339,32 @@
     $('#FormAdd').validate({
         focusCleanup: true,
         rules: {
-            name: {
+            first_name: {
                 required: true,
-            },
-            price: {
+            }, role: {
                 required: true,
-            },
+            }, email: {
+                required: true,
+            }, password: {
+                required: true,
+            }, password_confirm: {
+                required: true,
+                equalTo: "#password"
+            }
         },
         messages: {
-            name: {
+            first_name: {
+                required: 'กรุณาระบุ',
+            }, role: {
+                required: 'กรุณาระบุ',
+            }, email: {
+                required: 'กรุณาระบุ',
+            }, password: {
+                required: 'กรุณาระบุ',
+            }, password_confirm: {
                 required: "กรุณาระบุ",
-            },
-            price: {
-                required: "กรุณาระบุ",
-            },
+                equalTo: "รหัสไม่ตรงกับกับช่อง password",
+            }
         },
         errorPlacement: function (error, element) { // คำสั่งโชกล่องข้อความ
             error.addClass("help-block");
@@ -311,9 +416,17 @@
             dataType: 'json'
         }).done(function (rec) {
 
-            $('#edit_name').val(rec.name);
-            $('#edit_description').val(rec.description);
-            $('#edit_price').val(rec.price);
+            $('#edit_code').val(rec.code);
+            $('#edit_pid').val(rec.pid);
+            $('#edit_role').val(rec.role);
+            $('#edit_first_name').val(rec.first_name);
+            $('#edit_last_name').val(rec.last_name);
+            $('#edit_nick_name').val(rec.nick_name);
+            $('#edit_address').val(rec.address);
+            $('#edit_mobile').val(rec.mobile);
+            $('#edit_department').val(rec.department);
+
+            $('#edit_email').val(rec.email);
 
             btn.button("reset");
             $('#ModalEdit').modal("show");
@@ -386,7 +499,7 @@
         var name = btn.data('name');
         swal({
             title: "คุณต้องการลบ " + name + " ใช่หรือไม่",
-            text: "หากคุณลบจะไม่สามารถเรียกคืนข้อมูกลับมาได้",
+            text: "ตรวจสอบให้แน่ใจก่อนลบข้อมูล",
             type: 'warning',
             showCancelButton: true,
             confirmButtonClass: 'btn btn-success',
@@ -413,6 +526,8 @@
             }
         });
     });
+
+
     // show modal change_password
     $('body').on('click', '.btn-change_password', function (e) {
         e.preventDefault();
@@ -455,7 +570,7 @@
             btn.button("loading");
             $.ajax({
                 method: "POST",
-                url: url_gb + "/user/ChangePassword/" + id,
+                url: url_gb + "/user/update/change_password/" + id,
                 dataType: 'json',
                 data: $(form).serialize()
             }).done(function (rec) {

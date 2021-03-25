@@ -23,10 +23,12 @@ class UserController extends Controller {
         $input_all = $request->all();
 
         $input_all['created_at'] = date('Y-m-d H:i:s');
-        $input_all['created_by'] = \Auth::guard('admin')->user()->id;
+        $input_all['created_by'] = \Auth::user()->id;
         $input_all['updated_at'] = date('Y-m-d H:i:s');
-        $input_all['updated_by'] = \Auth::guard('admin')->user()->id;
+        $input_all['updated_by'] = \Auth::user()->id;
         $input_all['password'] = Hash::make($input_all['password']);
+
+        unset($input_all['password_confirm']);
 
         $validator = Validator::make($request->all(), [
                     'email' => 'required|email|unique:users',
@@ -66,16 +68,7 @@ class UserController extends Controller {
 
         $input_all = $request->all();
         $input_all['updated_at'] = date('Y-m-d H:i:s');
-        $input_all['updated_by'] = \Auth::guard('admin')->user()->id;
-
-        $user_id = $input_all['update_id'];
-        $check_email = User::find($user_id);
-
-        if (isset($input_all['birthday'])) {
-            $input_all['birthday'] = date_format_database($input_all['birthday']);
-        }
-
-        unset($input_all['update_id']);
+        $input_all['updated_by'] = \Auth::user()->id;
 
         $validator = Validator::make($request->all(), [
                     'email' => 'required|unique:users,email,' . $id,
@@ -93,9 +86,7 @@ class UserController extends Controller {
 
         \DB::beginTransaction();
         try {
-            $input_all['login_active'] = 'F';
-            $input_all['amount_mistake'] = '0';
-            User::where('id', $user_id)->update($input_all);
+            User::where('id', $id)->update($input_all);
             \DB::commit();
             $return['status'] = 1;
             $return['content'] = 'สำเร็จ';
@@ -104,15 +95,14 @@ class UserController extends Controller {
             $return['status'] = 0;
             $return['content'] = 'ไม่สำเร็จ' . $e->getMessage();
         }
-
         return $return;
     }
 
-    public function changePassword(Request $request, $id) {
+    public function change_password(Request $request, $id) {
 
         $input_all = $request->all();
         $input_all['updated_at'] = date('Y-m-d H:i:s');
-        $input_all['updated_by'] = \Auth::guard('admin')->user()->id;
+        $input_all['updated_by'] = \Auth::user()->id;
         $user_id = $input_all['update_id'];
         unset($input_all['update_id']);
 
@@ -143,6 +133,7 @@ class UserController extends Controller {
     }
 
     public function destroy($id) {
+        $return['title'] = 'ลบข้อมูล';
         \DB::beginTransaction();
         try {
             User::where('id', $id)->delete();
@@ -166,12 +157,12 @@ class UserController extends Controller {
                             return $str;
                         })
                         ->editColumn('created_at', function($rec) {
-                            return date('d-m-Y H:i:s', strtotime($rec->created_at));
+                            return DateThai($rec->created_at);
                         })->addColumn('action', function ($rec) {
                             if ($rec->id != 1) {
                                 $str = ' 
                                     <button class="btn btn-edit btn-warning" data-id="' . $rec->id . '">แก้ไข</button>    
-                                    <button class="btn btn-change_password btn-primary" data-id="' . $rec->id . '">เปลี่ยนรหัสผ่าน</button>
+                                    <button class="btn btn-change_password btn-warning" data-id="' . $rec->id . '">เปลี่ยนรหัสผ่าน</button>
                                     <button class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->first_name . ' ' . $rec->last_name . '">ลบ</button>    
                                     ';
                                 return $str;

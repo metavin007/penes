@@ -6,6 +6,8 @@
 
 @section('body')
 
+
+
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">

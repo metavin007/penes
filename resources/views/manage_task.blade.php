@@ -39,28 +39,21 @@
                                     <td class="text-center" rowspan="2">วันที่เปิดงาน</td>
                                     <td class="text-center" rowspan="2">ชื่อเพจ/ชื่องาน</td>
                                     <td class="text-center" rowspan="2">แพ็คเกจ</td>
-                                    <td class="text-center" rowspan="2">ราคา</td>
                                     <td class="text-center" colspan="2">บริษัท</td>
                                     <td class="text-center" colspan="2">{{ $setting_system->name1 }}</td>
                                     <td class="text-center" colspan="2">{{ $setting_system->name2 }}</td>
                                     <td class="text-center" colspan="2">{{ $setting_system->name3 }}</td>
                                     <td class="text-center" colspan="2">{{ $setting_system->name4 }}</td>
-                                    <td class="text-center" colspan="2">{{ $setting_system->name5 }}</td>
-                                    <td class="text-center" colspan="2">{{ $setting_system->name6 }}</td>
-                                    <td class="text-center" rowspan="2">ความคืบหน้า</td>
+                    				<td class="text-center" rowspan="2">ความคืบหน้า</td>
                                     <td class="text-center" rowspan="2">ยอดไลค์</td>
                                     <td class="text-center" rowspan="2">สถานะไลค์</td>
-                                    <td class="text-center" rowspan="2">ลิงค์เพจ</td>
-                                    <td class="text-center" rowspan="2">สรุปงาน</td>
-                                    <td class="text-center" rowspan="2">จัดการ</td>
+                      				<td class="text-center" rowspan="2">ลิงค์เพจ</td>
+									<td class="text-center" rowspan="2">สรุปงาน</td>
+									<td class="text-center" rowspan="2">จัดการ</td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">ช่อง</td>
                                     <td class="text-center">ช่อง</td>
-                                    <td class="text-center">สถานะ</td>
-                                    <td class="text-center">จำนวนภาพ</td>
-                                    <td class="text-center">สถานะ</td>
-                                    <td class="text-center">จำนวนภาพ</td>
                                     <td class="text-center">สถานะ</td>
                                     <td class="text-center">จำนวนภาพ</td>
                                     <td class="text-center">สถานะ</td>
@@ -73,7 +66,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <td class="text-center" colspan="8">รวม</td>
+                                    <td class="text-center" colspan="7">รวม</td>
                                     <td class="text-center" id="sum_qty_1">0</td>
                                     <td class="text-center"></td>
                                     <td class="text-center" id="sum_qty_2">0</td>
@@ -81,10 +74,6 @@
                                     <td class="text-center" id="sum_qty_3">0</td>
                                     <td class="text-center"></td>
                                     <td class="text-center" id="sum_qty_4">0</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center" id="sum_qty_5">0</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center" id="sum_qty_6">0</td>
                                     <td class="text-center" colspan="6"></td>
                                 </tr>
                             </tfoot>
@@ -519,7 +508,6 @@
             {"data": "pade_date", "className": "text-center"},
             {"data": "pade_name", "className": "text-left"},
             {"data": "package", "className": "text-left"},
-            {"data": "price", "className": "text-right"},
             {"data": "company_text_1", "className": "text-center"},
             {"data": "company_text_2", "className": "text-center"},
             {"data": "a_text", "className": "text-center"},
@@ -530,16 +518,12 @@
             {"data": "c_number", "className": "text-center"},
             {"data": "d_text", "className": "text-center"},
             {"data": "d_number", "className": "text-center"},
-            {"data": "e_text", "className": "text-center"},
-            {"data": "e_number", "className": "text-center"},
-            {"data": "f_text", "className": "text-center"},
-            {"data": "f_number", "className": "text-center"},
             {"data": "status_progress", "className": "text-center"},
             {"data": "amount_like", "className": "text-right"},
             {"data": "status_like", "className": "text-center"},
-            {"data": "link_page", "className": "text-center"},
-            {"data": "status_work", "className": "text-center"},
-            {"data": "action", "className": "action text-center", "orderable": false, "searchable": false}
+     		{"data": "link_page", "className": "text-center"},
+			{"data": "status_work", "className": "text-center"},
+			{"data": "action", "className": "action text-center", "orderable": false, "searchable": false},
         ], "order": [[1, "desc"]],
         rowCallback: function (row, data, index) {
             if (data['status_work'] === 'สรุปส่งงานแล้ว') {

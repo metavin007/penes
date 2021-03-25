@@ -981,13 +981,14 @@ Buttons
 
 .btn-info,
 .btn-info.disabled {
-  background: #009efb;
-  border: 1px solid #009efb; }
+  background: #01c0c8;
+    border: 1px solid #8fda34; 
+}
   .btn-info:hover,
   .btn-info.disabled:hover {
-    background: #009efb;
-    opacity: 0.7;
-    border: 1px solid #009efb; }
+    background: #03848a;
+    border: 1px solid #13c0c8;
+  }
   .btn-info.active, .btn-info:focus,
   .btn-info.disabled.active,
   .btn-info.disabled:focus {
@@ -995,15 +996,16 @@ Buttons
 
 .btn-warning,
 .btn-warning.disabled {
-  background: #ffbc34;
-  border: 1px solid #ffbc34;
-  color: #ffffff; }
+    background: #ffffff;
+    border: 1px solid #dc9607;
+    color: #dc9607;
+}
   .btn-warning:hover,
   .btn-warning.disabled:hover {
-    background: #ffbc34;
+    background: #ffad0f;
     color: #ffffff;
-    opacity: 0.7;
-    border: 1px solid #ffbc34; }
+    border: 1px solid #ffbc34;
+    }
   .btn-warning.active, .btn-warning:focus,
   .btn-warning.disabled.active,
   .btn-warning.disabled:focus {
@@ -1011,12 +1013,13 @@ Buttons
 
 .btn-danger,
 .btn-danger.disabled {
-  background: #f62d51;
-  border: 1px solid #f62d51; }
+  background: #ffffff;
+    border: 1px solid #f62d51;
+    color: #dc3545;
+}
   .btn-danger:hover,
   .btn-danger.disabled:hover {
-    background: #f62d51;
-    opacity: 0.7;
+    background: #e30029;
     border: 1px solid #f62d51; }
   .btn-danger.active, .btn-danger:focus,
   .btn-danger.disabled.active,
@@ -1025,9 +1028,11 @@ Buttons
 
 .btn-inverse,
 .btn-inverse.disabled {
-  background: #2f3d4a;
-  border: 1px solid #2f3d4a;
+  background: #0f93e5;
+  border: 1px solid #ffff;
   color: #ffffff; }
+
+
   .btn-inverse:hover,
   .btn-inverse.disabled:hover {
     background: #2f3d4a;
@@ -1689,8 +1694,12 @@ textarea {
 Form-control
 ******************/
 .form-control {
-  color: #54667a;
-  display: initial; }
+    color: #54667a;
+    display: initial;
+    border-style: solid;
+    border-width: 2px;
+    border-color: yellowgreen;
+}
 
 .form-control-sm {
   min-height: 20px; }
@@ -3428,7 +3437,7 @@ Table- editable table
     border-radius: 4px;
     border: 0px; }
   .paging_simple_numbers .pagination .paginate_button.active a, .paging_simple_numbers .pagination .paginate_button:hover a {
-    background: #009efb;
+  background: #13c0c8;
     color: #ffffff; }
 
 /*******************

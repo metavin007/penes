@@ -20,10 +20,10 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
-                            <h4 class="card-title">ตารางจัดเก็บใบเสร็จลูกค้า</h4>
+                            <h4 class="">ตารางจัดเก็บใบเสร็จลูกค้า</h4>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn float-right btn-primary btn-add"> สร้าง</button>
+                            <button class="btn float-right btn btn-info btn-add btn-lg"> <i class="me-2 mdi mdi-plus-circle"></i> สร้าง</button>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -31,9 +31,9 @@
                             <thead>
                                 <tr>
                                     <td class="text-center" style="width: 5%;">ลำดับ</td>
-                                    <td class="text-center" style="width: 20%;">ชื่องาน</td>
+                                    <td class="text-center" style="width: 25%;">ชื่อลูกค้า/งาน</td>
                                     <td class="text-center" style="width: 20%;">สลิป</td>
-                                    <td class="text-center" style="width: 10%;">วันที่จ่าย</td>
+                                    <td class="text-center" style="width: 10%;">วันที่</td>
                                     <td class="text-center" style="width: 15%;">สถานะ</td>
                                     <td class="text-center" style="width: 10%;">ใบเสร็จ</td>
                                     <td class="text-center" style="width: 20%;">จัดการ</td>
@@ -51,7 +51,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">เพิ่ม</h3>
+                <h3 class="" id="myLargeModalLabel">สร้าง</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form id="FormAdd">
@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="add_name">ชื่องาน</label>
+                                <label for="add_name">ชื่อลูกค้า/งาน</label>
                                 <input type="text" name="name" id="add_name" class="form-control" required="">
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                             <div class="form-group">
                                 <label for="add_status">สถานะ</label>
                                 <select name="status" id="add_status" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ไม่ได้กำหนด</option>
                                     <option value="ขอใบเสร็จ">ขอใบเสร็จ</option>
                                 </select>
                             </div>
@@ -100,7 +100,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">แก้ไข</h3>
+                <h3 class="" id="myLargeModalLabel">แก้ไข</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_id">
@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="edit_name">ชื่องาน</label>
+                                <label for="edit_name">ชื่อลูกค้า/งาน</label>
                                 <input type="text" name="name" id="edit_name" class="form-control" required="">
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                             <div class="form-group">
                                 <label for="edit_status">สถานะ</label>
                                 <select name="status" id="edit_status" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ไม่ได้กำหนด</option>
                                     <option value="ขอใบเสร็จ">ขอใบเสร็จ</option>
                                 </select>
                             </div>
@@ -149,7 +149,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">ดูภาพ</h3>
+                <h3 class="" id="myLargeModalLabel">ดูภาพ</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_id">
@@ -173,7 +173,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">อัพโหลด</h3>
+                <h3 class="" id="myLargeModalLabel">อัพโหลด</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_upload_id">
@@ -229,16 +229,32 @@
         },
         "columns": [
             {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
-            {"data": "name"},
-            {"data": "file", "className": "text-center"},
+            {"data": "name","orderable": false,},
+            {"data": "file", "className": "text-center" ,"orderable": false,},
             {"data": "receipt_date", "className": "text-center"},
             {"data": "status", "className": "text-center"},
             {"data": "receipt_file", "className": "text-center"},
-            {"data": "action", "className": "action text-center", "orderable": false, "searchable": false}
+            {"data": "action", "className": "action text-right", "orderable": false, "searchable": false}
         ], "order": [[3, "desc"]],
         rowCallback: function (row, data, index) {
 
-        }
+        },
+         //แก้ไขชื่อ ข้อความต่างๆ ;
+         "language": {
+    "search": "ค้นหา",
+
+     "paginate": {
+        "first":        "หน้าแรก",
+        "previous":     "ก่อนหน้า",
+        "next":         "ต่อไป",
+        "last":         "สุดท้าย"
+    },
+    "processing":       "Processing...",
+
+
+  }
+
+
     });
 
     $('body').on('click', '.btn-add', function (e) {
@@ -565,5 +581,8 @@
             });
         }
     });
+
+
+
 </script>
 @endsection

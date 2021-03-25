@@ -16,6 +16,38 @@ class ProfileController extends Controller {
         return view('pro_file');
     }
 
+    public function update_profile(Request $request) {
+
+        $input_all = $request->all();
+
+        $validator = Validator::make($request->all(), [
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+        ]);
+
+        $return['title'] = 'แก้ไขข้อมูล';
+
+        if ($validator->fails()) {
+            $return['status'] = 0;
+            $return['content'] = $validator->errors()->first();
+            return $return;
+        }
+
+        \DB::beginTransaction();
+        try {
+            User::where('id', \Auth::user()->id)->update($input_all);
+            \DB::commit();
+            $return['status'] = 1;
+            $return['content'] = 'สำเร็จ';
+        } catch (Exception $e) {
+            \DB::rollBack();
+            $return['status'] = 0;
+            $return['content'] = 'ไม่สำรเร็จ' . $e->getMessage();
+        }
+
+        return $return;
+    }
+
     public function change_password_profile(Request $request) {
 
         $old_password = $request->input('old_password');

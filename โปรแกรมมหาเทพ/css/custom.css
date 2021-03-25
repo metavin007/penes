@@ -1,4 +1,19 @@
 
+thead {
+    font-weight: 300;
+    background: linear-gradient(to right, #01c0c8 0%, #98dd14 100%);
+    color: white;
+}
+
+table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+    border-left-width: 1px;
+    border-color: #a7dced;
+}
+
+.modal-content {
+    padding: 20px !important; 
+}
+
 /*ใส่ฟ้อน*/
 body {
     /*background: #fff;*/

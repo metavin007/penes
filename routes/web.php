@@ -11,10 +11,12 @@ Auth::routes([
 Route::get('/', [App\Http\Controllers\FirstPageController::class, 'index']);
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
-Route::post('/profile/change_password_profile', [App\Http\Controllers\ProfileController::class, 'change_password_profile']);
+Route::post('profile/update_profile', [App\Http\Controllers\ProfileController::class, 'update_profile']);
+Route::post('profile/change_password_profile', [App\Http\Controllers\ProfileController::class, 'change_password_profile']);
 
 Route::get('user/get/get_datatable', [App\Http\Controllers\UserController::class, 'get_datatable']);
 Route::get('user/get/get_by_id/{id}', [App\Http\Controllers\UserController::class, 'get_by_id']);
+Route::post('user/update/change_password/{id}', [App\Http\Controllers\UserController::class, 'change_password']);
 Route::resource('user', App\Http\Controllers\UserController::class)->only([
     'index', 'store', 'update', 'destroy'
 ])->name('index', 'user');
