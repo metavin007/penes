@@ -7,15 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ManageTask;
 use App\Models\Package;
-use App\Models\StatusManageTask;
-use App\Models\SettingSystem;
+use App\Models\Freelance;
 
 class ManageTaskController extends Controller {
 
     public function index() {
-        $data['setting_system'] = SettingSystem::find(1);
         $data['packages'] = Package::get();
-        $data['status_manage_tasks'] = StatusManageTask::get();
+        $data['freelances'] = Freelance::get();
         return view('manage_task', $data);
     }
 
@@ -123,12 +121,18 @@ class ManageTaskController extends Controller {
         return $return;
     }
 
-    public function get_datatable() {
-        $result = ManageTask::select();
+    public function get_datatable(Request $request) {
+        $date_search_start = $request->input('date_search_start');
+        $date_search_end = $request->input('date_search_end');
+        if ($date_search_start && $date_search_end) {
+            $date_search_start = date('Y-m-d', strtotime($date_search_start));
+            $date_search_end = date('Y-m-d', strtotime($date_search_end));
+        }
+        $result = ManageTask::whereBetween('pade_date', [$date_search_start, $date_search_end])->select();
         return \DataTables::of($result)
                         ->addIndexColumn()
                         ->editColumn('pade_date', function($rec) {
-                            return date('d-m-Y', strtotime($rec->pade_date));
+                            return DateThai($rec->pade_date);
                         })
                         ->editColumn('price', function($rec) {
                             return number_format($rec->price, 2);
@@ -139,10 +143,36 @@ class ManageTaskController extends Controller {
                         ->addColumn('action', function($rec) {
                             $str = '
                           <button type="button" class="btn btn-edit btn-warning" data-id="' . $rec->id . '">แก้ไข</button>
-                          <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->name . '">ลบ</button>   
+                          <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->pade_name . '">ลบ</button>   
                             ';
                             return $str;
                         })->rawColumns(['action', 'link_page'])->make(true);
+    }
+
+    public function get_datatable_freelance(Request $request) {
+        $date_search_start = $request->input('date_search_start');
+        $date_search_end = $request->input('date_search_end');
+        if ($date_search_start && $date_search_end) {
+            $date_search_start = date('Y-m-d', strtotime($date_search_start));
+            $date_search_end = date('Y-m-d', strtotime($date_search_end));
+        }
+        $result = ManageTask::whereBetween('pade_date', [$date_search_start, $date_search_end])->groupBy('freelance')
+                ->selectRaw('freelance, sum(amount_image) as sum_amount_image')
+                ->get();
+        return \DataTables::of($result)->make(true);
+    }
+
+    public function get_datatable_package(Request $request) {
+        $date_search_start = $request->input('date_search_start');
+        $date_search_end = $request->input('date_search_end');
+        if ($date_search_start && $date_search_end) {
+            $date_search_start = date('Y-m-d', strtotime($date_search_start));
+            $date_search_end = date('Y-m-d', strtotime($date_search_end));
+        }
+        $result = ManageTask::whereBetween('pade_date', [$date_search_start, $date_search_end])->groupBy('package')
+                ->selectRaw('package, COUNT(id) as sum_amount_package')
+                ->get();
+        return \DataTables::of($result)->make(true);
     }
 
 }

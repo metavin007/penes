@@ -1,6 +1,7 @@
 <aside class="left-sidebar">
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
+            @can('isCEO')
             <ul id="sidebarnav">
                 <li class="{{ (request()->is("profile/*") || request()->is("user/*")  ? 'active' : '') }}">
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-box"></i><span class="hide-menu">ผู้ใช้งาน</span></a>
@@ -9,12 +10,11 @@
                         <li><a href="{{ route('user') }}" class="{{ (request()->is("user/*") ? 'active' : '') }}">พนักงาน</a></li>
                     </ul>
                 </li>
-                <li class="{{ (request()->is("package/*") || request()->is("status_manage_task/*") || request()->is("setting_system/*")  ? 'active' : '') }}">
+                <li class="{{ (request()->is("package/*") || request()->is("freelance/*") || request()->is("setting_system/*")  ? 'active' : '') }}">
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">ตารางอ้างอิง</span></a>
                     <ul aria-expanded="false" class="collapse">     
                         <li><a href="{{ route('package') }}" class="{{ (request()->is("package/*") ? 'active' : '') }}">แพ็คเกจ</a></li>
-                        <li><a href="{{ route('status_manage_task') }}" class="{{ (request()->is("status_manage_task/*") ? 'active' : '') }}">สถานะจัดการงาน</a></li>
-                        <li><a href="{{ route('setting_system') }}" class="{{ (request()->is("setting_system/*") ? 'active' : '') }}">ตั้งค่าชื่อฟรีแลนซ์</a></li>
+                        <li><a href="{{ route('freelance') }}" class="{{ (request()->is("freelance/*") ? 'active' : '') }}">ฟรีแลนซ์</a></li>
                     </ul>
                 </li>  
                 <li class="{{ (request()->is("manage_task/*") || request()->is("customer_google_adses/*") || request()->is("receipt/*") || request()->is("receipt_company/*") ? 'active' : '') }}">
@@ -25,15 +25,48 @@
                         <li><a href="{{ route('receipt') }}" class="{{ (request()->is("receipt/*") ? 'active' : '') }}">จัดเก็บสลิปเปิดงานลูกค้า</a></li>
                         <li><a href="{{ route('receipt_company') }}" class="{{ (request()->is("receipt_company/*") ? 'active' : '') }}">จัดเก็บสลิปจ่ายบริษัท</a></li>
                     </ul>
-                </li>  
-                <!--                <li class="{{ (request()->is("report_manage_task/*") || request()->is("report_customer_google_ads/*")  ? 'active' : '') }}">
-                                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">รายงาน</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="{{ route('report_manage_task') }}" class="{{ (request()->is("report_manage_task/*") ? 'active' : '') }}">ตารางจัดการงาน </a></li>
-                                        <li><a href="{{ route('report_customer_google_ads') }}" class="{{ (request()->is("report_customer_google_ads/*") ? 'active' : '') }}">ตารางลูกค้า google ads </a></li>
-                                    </ul>
-                                </li>-->
+                </li>
             </ul>
+            @elsecan('isAdmin')
+            <ul id="sidebarnav">
+                <li class="{{ (request()->is("profile/*") || request()->is("user/*")  ? 'active' : '') }}">
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-box"></i><span class="hide-menu">ผู้ใช้งาน</span></a>
+                    <ul aria-expanded="false" class="collapse">     
+                        <li><a href="{{ route('profile') }}" class="{{ (request()->is("profile/*") ? 'active' : '') }}">โปรไฟล์</a></li>
+                    </ul>
+                </li>
+                <li class="{{ (request()->is("package/*") || request()->is("freelance/*") || request()->is("setting_system/*")  ? 'active' : '') }}">
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">ตารางอ้างอิง</span></a>
+                    <ul aria-expanded="false" class="collapse">     
+                        <li><a href="{{ route('package') }}" class="{{ (request()->is("package/*") ? 'active' : '') }}">แพ็คเกจ</a></li>
+                        <li><a href="{{ route('freelance') }}" class="{{ (request()->is("freelance/*") ? 'active' : '') }}">ฟรีแลนซ์</a></li>
+                    </ul>
+                </li>  
+                <li class="{{ (request()->is("manage_task/*") || request()->is("customer_google_adses/*") || request()->is("receipt/*") || request()->is("receipt_company/*") ? 'active' : '') }}">
+                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">ระบบการทำงาน</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ route('manage_task') }}" class="{{ (request()->is("manage_task/*") ? 'active' : '') }}">วางแผนการทำงาน</a></li>
+                        <li><a href="{{ route('customer_google_adses') }}" class="{{ (request()->is("customer_google_ads/*") ? 'active' : '') }}">ตารางลูกค้าลงโฆษณา</a></li>
+                        <li><a href="{{ route('receipt') }}" class="{{ (request()->is("receipt/*") ? 'active' : '') }}">จัดเก็บสลิปเปิดงานลูกค้า</a></li>
+                    </ul>
+                </li>
+            </ul>
+            @elsecan('isUser')
+            <ul id="sidebarnav">
+                <li class="{{ (request()->is("profile/*") || request()->is("user/*")  ? 'active' : '') }}">
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-box"></i><span class="hide-menu">ผู้ใช้งาน</span></a>
+                    <ul aria-expanded="false" class="collapse">     
+                        <li><a href="{{ route('profile') }}" class="{{ (request()->is("profile/*") ? 'active' : '') }}">โปรไฟล์</a></li>
+                    </ul>
+                </li>  
+                <li class="{{ (request()->is("manage_task/*") || request()->is("customer_google_adses/*") || request()->is("receipt/*") || request()->is("receipt_company/*") ? 'active' : '') }}">
+                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">ระบบการทำงาน</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ route('manage_task') }}" class="{{ (request()->is("manage_task/*") ? 'active' : '') }}">วางแผนการทำงาน</a></li> 
+                    </ul>
+                </li>
+            </ul>
+            @endcan
         </nav>
     </div>
     <div class="sidebar-footer">

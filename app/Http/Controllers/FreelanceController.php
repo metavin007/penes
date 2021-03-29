@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\StatusManageTask;
+use App\Models\Freelance;
 
-class StatusManageTaskController extends Controller {
+class FreelanceController extends Controller {
 
     public function index() {
-        return view('status_manage_task');
+        if (\Gate::allows('isCEO') || \Gate::allows('isAdmin')) {
+            return view('freelance');
+        } else {
+            abort(503);
+        }
     }
 
     public function create() {
@@ -40,7 +44,7 @@ class StatusManageTaskController extends Controller {
 
         \DB::beginTransaction();
         try {
-            StatusManageTask::insert($input_all);
+            Freelance::insert($input_all);
             \DB::commit();
             $return['status'] = 1;
             $return['content'] = 'สำเร็จ';
@@ -53,12 +57,12 @@ class StatusManageTaskController extends Controller {
     }
 
     public function get_by_id($id) {
-        $result = StatusManageTask::find($id);
+        $result = Freelance::find($id);
         return json_encode($result);
     }
 
     public function update(Request $request, $id) {
-        
+
         $input_all = $request->all();
 
         $input_all['updated_at'] = date('Y-m-d H:i:s');
@@ -79,7 +83,7 @@ class StatusManageTaskController extends Controller {
         \DB::beginTransaction();
         try {
 
-            StatusManageTask::where('id', $id)->update($input_all);
+            Freelance::where('id', $id)->update($input_all);
 
             \DB::commit();
             $return['status'] = 1;
@@ -96,7 +100,7 @@ class StatusManageTaskController extends Controller {
         $return['title'] = 'ลบข้อมูล';
         \DB::beginTransaction();
         try {
-            StatusManageTask::where('id', $id)->delete();
+            Freelance::where('id', $id)->delete();
             \DB::commit();
             $return['status'] = 1;
             $return['content'] = 'สำเร็จ';
@@ -109,7 +113,7 @@ class StatusManageTaskController extends Controller {
     }
 
     public function get_datatable() {
-        $result = StatusManageTask::select();
+        $result = Freelance::select();
         return \DataTables::of($result)
                         ->addIndexColumn()
                         ->editColumn('created_at', function($rec) {

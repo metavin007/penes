@@ -8,19 +8,19 @@
     }
     /*แจ้งต่อบริการ*/
     .row_status_2{
-     color: #f00;
-    background-color: #ffffff;
+        color: #f00;
+        background-color: #ffffff;
     }
     /*ชำระแล้ว*/
     .row_status_3{
-    color: #078002;
-    background-color: #ffff;
+        color: #078002;
+        background-color: #ffff;
     }
     /*ไม่ต่อบริการ*/
     .row_status_4 {
-    color: #716c6c7a;
-   background-color: #eeeeee;
-}
+        color: #716c6c7a;
+        background-color: #eeeeee;
+    }
 </style>
 @endsection
 
@@ -61,7 +61,41 @@
                                     <td class="text-center">จัดการ</td>
                                     <td class="text-center">ชื่อเว๊ป</td>
                                     <td class="text-center">วันหมดอายุเว๊ปไซด์</td>
-                             
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-lg-6">
+                            <h4 class=""> ตารางลูกค้า Google Ads (ไม่ต่อบริการ)</h4>
+                        </div>
+                    </div>
+                    <div class="table-responsive m-t-40">
+                        <table id="TableNoService" class="display nowrap table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <td class="text-center">ลำดับ</td>
+                                    <td class="text-center">ชื่อธุรกิจ</td>
+                                    <td class="text-center">ราคา</td>
+                                    <td class="text-center">ชำระล่วงหน้า</td>
+                                    <td class="text-center">วันที่สิ้นสุดบริการ</td>
+                                    <td class="text-center">ข้อมูลติดต่อ</td>
+                                    <td class="text-center">สถานะ</td>
+                                    <td class="text-center">จัดการโฆษณา</td>
+                                    <td class="text-center">จัดการ</td>
+                                    <td class="text-center">ชื่อเว๊ป</td>
+                                    <td class="text-center">วันหมดอายุเว๊ปไซด์</td>
                                 </tr>
                             </thead>
                         </table>
@@ -263,6 +297,7 @@
                 targets: "datatable-nosort",
                 orderable: false,
             }],
+        pageLength: 50,
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "language": {
             "info": "_START_-_END_ of _TOTAL_ entries",
@@ -278,17 +313,68 @@
         },
         "columns": [
             {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
-            {"data": "name", "orderable": false},
+            {"data": "name", "className": "text-left", "orderable": false},
             {"data": "price", "className": "text-right", "orderable": false},
             {"data": "prepay", "className": "text-center", "orderable": false},
             {"data": "service_end_date", "className": "text-center"},
-            {"data": "contact", "className": "text-right", "orderable": false},
-             {"data": "status", "className": "text-center"},
-             {"data": "manage_ads", "className": "text-center", "orderable": false},
+            {"data": "contact", "className": "text-left", "orderable": false},
+            {"data": "status", "className": "text-center"},
+            {"data": "manage_ads", "className": "text-center", "orderable": false},
             {"data": "action", "className": "action text-center", "orderable": false, "searchable": false},
             {"data": "link_web", "className": "text-center", "orderable": false},
             {"data": "expired_web_date", "className": "text-center"},
-           
+        ], "order": [[4, "asc"]],
+        rowCallback: function (row, data, index) {
+            if (data['status'] === 'แจ้งเติมเงิน') {
+                $(row).addClass('row_status_1');
+            } else if (data['status'] === 'แจ้งต่อบริการ') {
+                $(row).addClass('row_status_2');
+            } else if (data['status'] === 'ชำระแล้ว') {
+                $(row).addClass('row_status_3');
+            } else if (data['status'] === 'ไม่ต่อบริการ') {
+                $(row).addClass('row_status_4');
+            }
+        }
+    });
+
+    var TableNoService = $('#TableNoService').dataTable({
+        // เซอเวอไซต์ต้องมี 2 อันนี้
+        "processing": true,
+        "serverSide": true,
+        // -------------------
+        scrollCollapse: true,
+        autoWidth: false,
+        responsive: true,
+        columnDefs: [{
+                targets: "datatable-nosort",
+                orderable: false,
+            }],
+        pageLength: 50,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "language": {
+            "info": "_START_-_END_ of _TOTAL_ entries",
+            searchPlaceholder: "Search"
+        },
+        "ajax": {
+            "url": url_gb + "/customer_google_adses/get/get_datatable_no_service",
+            "data": function (d) {
+                //d.myKey = "myValue";
+                // d.custom = $('#myInput').val();
+                // etc
+            }
+        },
+        "columns": [
+            {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
+            {"data": "name", "className": "text-left", "orderable": false},
+            {"data": "price", "className": "text-right", "orderable": false},
+            {"data": "prepay", "className": "text-center", "orderable": false},
+            {"data": "service_end_date", "className": "text-center"},
+            {"data": "contact", "className": "text-left", "orderable": false},
+            {"data": "status", "className": "text-center"},
+            {"data": "manage_ads", "className": "text-center", "orderable": false},
+            {"data": "action", "className": "action text-center", "orderable": false, "searchable": false},
+            {"data": "link_web", "className": "text-center", "orderable": false},
+            {"data": "expired_web_date", "className": "text-center"},
         ], "order": [[4, "asc"]],
         rowCallback: function (row, data, index) {
             if (data['status'] === 'แจ้งเติมเงิน') {
@@ -362,6 +448,7 @@
                 btn.button("reset");
                 if (rec.status == 1) {
                     TableList.api().ajax.reload();
+                    TableNoService.api().ajax.reload();
                     form.reset();
                     swal(rec.title, rec.content, "success");
                     $('#ModalAdd').modal('hide');
@@ -461,6 +548,7 @@
                 btn.button("reset");
                 if (rec.status == 1) {
                     TableList.api().ajax.reload();
+                    TableNoService.api().ajax.reload();
                     form.reset();
                     swal(rec.title, rec.content, "success");
                     $('#ModalEdit').modal('hide');

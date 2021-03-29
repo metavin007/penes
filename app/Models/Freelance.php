@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StatusManageTask extends Model
+class Freelance extends Model
 {
     //protected $table = '';
     //protected $primaryKey = '';

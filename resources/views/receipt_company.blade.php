@@ -6,14 +6,34 @@
 
 @section('body')
 
-
-
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/receipt_company') }}">ตารางจัดเก็บใบเสร็จบริษัท</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/receipt_company') }}">ตารางจัดเก็บสลิปจ่ายบริษัท</a></li>
             </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row"> 
+                        <div class="col-lg-2">    
+                            <div class="form-group">
+                                <label style="font-weight: bold;"><b>วันที่เริ่ม : </b></label>
+                                <input type="text" id="date_search_start" class="form-control" readonly="" value="{{ date('01-m-Y') }}">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">    
+                            <div class="form-group">
+                                <label style="font-weight: bold;"><b>วันที่สิ้นสุด : </b></label>
+                                <input type="text" id="date_search_end" class="form-control" readonly="" value="{{ date('t-m-Y') }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -22,10 +42,10 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
-                            <h4 class="card-title">ตารางจัดเก็บใบเสร็จบริษัท</h4>
+                            <h4 class="">ตารางจัดเก็บสลิปจ่ายบริษัท</h4>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn float-right btn-primary btn-add"> สร้าง</button>
+                            <button class="btn float-right btn btn-info btn-add btn-lg"> <i class="me-2 mdi mdi-plus-circle"></i> สร้าง</button>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -33,9 +53,11 @@
                             <thead>
                                 <tr>
                                     <td class="text-center" style="width: 5%;">ลำดับ</td>
-                                    <td class="text-center" style="width: 45%;">ชื่องาน</td>
+                                    <td class="text-center" style="width: 25%;">ชื่อลูกค้า/งาน</td>
                                     <td class="text-center" style="width: 20%;">สลิป</td>
-                                    <td class="text-center" style="width: 10%;">วันที่จ่าย</td>
+                                    <td class="text-center" style="width: 10%;">วันที่</td>
+                                    <td class="text-center" style="width: 15%;">สถานะ</td>
+                                    <td class="text-center" style="width: 10%;">ใบเสร็จ</td>
                                     <td class="text-center" style="width: 20%;">จัดการ</td>
                                 </tr>
                             </thead>
@@ -51,7 +73,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">เพิ่ม</h3>
+                <h3 class="" id="myLargeModalLabel">สร้าง</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form id="FormAdd">
@@ -59,7 +81,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="add_name">ชื่องาน</label>
+                                <label for="add_name">ชื่อลูกค้า/งาน</label>
                                 <input type="text" name="name" id="add_name" class="form-control" required="">
                             </div>
                         </div>
@@ -75,6 +97,15 @@
                                 <input type="text" name="receipt_date" id="add_receipt_date" class="form-control date_time-picker" readonly="">
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="add_status">สถานะ</label>
+                                <select name="status" id="add_status" class="form-control">
+                                    <option value="" selected="">ไม่ได้กำหนด</option>
+                                    <option value="ขอใบเสร็จ">ขอใบเสร็จ</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -86,11 +117,12 @@
     </div>
 </div>
 
+
 <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">แก้ไข</h3>
+                <h3 class="" id="myLargeModalLabel">แก้ไข</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_id">
@@ -99,7 +131,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="edit_name">ชื่องาน</label>
+                                <label for="edit_name">ชื่อลูกค้า/งาน</label>
                                 <input type="text" name="name" id="edit_name" class="form-control" required="">
                             </div>
                         </div>
@@ -113,6 +145,15 @@
                             <div class="form-group">
                                 <label for="edit_receipt_date">วันที่จ่าย</label>
                                 <input type="text" name="receipt_date" id="edit_receipt_date" class="form-control date_time-picker" readonly="">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="edit_status">สถานะ</label>
+                                <select name="status" id="edit_status" class="form-control">
+                                    <option value="" selected="">ไม่ได้กำหนด</option>
+                                    <option value="ขอใบเสร็จ">ขอใบเสร็จ</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -130,7 +171,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">ดูภาพ</h3>
+                <h3 class="" id="myLargeModalLabel">ดูภาพ</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_id">
@@ -150,47 +191,123 @@
     </div>
 </div>
 
+<div class="modal fade" id="ModalUpload" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="" id="myLargeModalLabel">อัพโหลด</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <input type="hidden" id="update_upload_id">
+            <form id="FormUpload">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12"> 
+                            <div class="form-group">
+                                <label for="edit_receipt_file"><b>ใบเสร็จ</b></label>
+                                <input type="file" id="edit_receipt_file" name="receipt_file" class="dropify" data-max-file-size="2M" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-success">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('js_bottom')
 <script>
 
-    var TableList = $('#Table').dataTable({
-        // เซอเวอไซต์ต้องมี 2 อันนี้
-        "processing": true,
-        "serverSide": true,
-        // -------------------
-        scrollCollapse: true,
-        autoWidth: false,
-        responsive: true,
-        columnDefs: [{
-                targets: "datatable-nosort",
-                orderable: false,
-            }],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "language": {
-            "info": "_START_-_END_ of _TOTAL_ entries",
-            searchPlaceholder: "Search"
-        },
-        "ajax": {
-            "url": url_gb + "/receipt_company/get/get_datatable",
-            "data": function (d) {
-                //d.myKey = "myValue";
-                // d.custom = $('#myInput').val();
-                // etc
-            }
-        },
-        "columns": [
-            {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
-            {"data": "name"},
-            {"data": "file", "className": "text-center"},
-            {"data": "receipt_date", "className": "text-center"},
-            {"data": "action", "className": "action text-center", "orderable": false, "searchable": false}
-        ], "order": [[3, "desc"]],
-        rowCallback: function (row, data, index) {
+    get_table_list($("#date_search_start").val(), $("#date_search_end").val());
 
+    $('#date_search_start').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoUpdateInput: false,
+        locale: {
+            format: 'DD-MM-YYYY'
+        }, minDate: 0,
+    });
+    $('#date_search_end').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoUpdateInput: false,
+        locale: {
+            format: 'DD-MM-YYYY'
         }
     });
+
+    $('#date_search_start').on('apply.daterangepicker', function (e, picker) {
+        $(this).val(picker.startDate.format('DD-MM-YYYY'));
+        get_table_list(picker.startDate.format('DD-MM-YYYY'), $('#date_search_end').val());
+    })
+    $('#date_search_end').on('apply.daterangepicker', function (e, picker) {
+        $(this).val(picker.startDate.format('DD-MM-YYYY'));
+        get_table_list($('#date_search_start').val(), picker.startDate.format('DD-MM-YYYY'));
+    })
+
+    var TableList;
+    function get_table_list(date_search_start, date_search_end) {
+        if (TableList != undefined) {
+            TableList.DataTable().destroy();
+        }
+        TableList = $('#Table').dataTable({
+            // เซอเวอไซต์ต้องมี 2 อันนี้
+            "processing": true,
+            "serverSide": true,
+            // -------------------
+            scrollCollapse: true,
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+            pageLength: 50,
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "info": "_START_-_END_ of _TOTAL_ entries",
+                searchPlaceholder: "Search"
+            },
+            "ajax": {
+                "url": url_gb + "/receipt_company/get/get_datatable",
+                "data": function (d) {
+                    d.date_search_start = date_search_start;
+                    d.date_search_end = date_search_end;
+                }
+            },
+            "columns": [
+                {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
+                {"data": "name", "orderable": false, },
+                {"data": "file", "className": "text-center", "orderable": false, },
+                {"data": "receipt_date", "className": "text-center"},
+                {"data": "status", "className": "text-center"},
+                {"data": "receipt_file", "className": "text-center"},
+                {"data": "action", "className": "action text-right", "orderable": false, "searchable": false}
+            ], "order": [[3, "desc"]],
+            rowCallback: function (row, data, index) {
+
+            },
+            //แก้ไขชื่อ ข้อความต่างๆ ;
+            "language": {
+                "search": "ค้นหา",
+
+                "paginate": {
+                    "first": "หน้าแรก",
+                    "previous": "ก่อนหน้า",
+                    "next": "ต่อไป",
+                    "last": "สุดท้าย"
+                },
+                "processing": "Processing...",
+            }
+        });
+    }
 
     $('body').on('click', '.btn-add', function (e) {
         e.preventDefault();
@@ -218,7 +335,7 @@
             name: {
                 required: true,
             },
-            price: {
+            receipt_date: {
                 required: true,
             },
         },
@@ -226,7 +343,7 @@
             name: {
                 required: "กรุณาระบุ",
             },
-            price: {
+            receipt_date: {
                 required: "กรุณาระบุ",
             },
         },
@@ -284,7 +401,7 @@
         }).done(function (rec) {
 
             $('#open_file').attr('src', asset_gb + 'uploads/receipt_company/' + rec['receipt'].file)
-            
+
             btn.button("reset");
             $('#ModalLook').modal("show");
         }).fail(function () {
@@ -347,7 +464,7 @@
             name: {
                 required: true,
             },
-            price: {
+            receipt_date: {
                 required: true,
             },
         },
@@ -355,7 +472,7 @@
             name: {
                 required: "กรุณาระบุ",
             },
-            price: {
+            receipt_date: {
                 required: "กรุณาระบุ",
             },
         },
@@ -435,6 +552,89 @@
             }
         });
     });
+
+    $('body').on('click', '.btn-upload', function (e) {
+        e.preventDefault();
+        var btn = $(this);
+        btn.button('loading');
+        var id = $(this).data('id');
+        $('#update_upload_id').val(id);
+
+        $.ajax({
+            method: "GET",
+            url: url_gb + "/receipt_company/get/get_by_id/" + id,
+            dataType: 'json'
+        }).done(function (rec) {
+
+
+            var drEvent = $('#edit_receipt_file').dropify(
+                    {
+                        efaultFile: asset_gb + 'uploads/receipt_company_file/' + rec['receipt'].receipt_file
+                    });
+            drEvent = drEvent.data('dropify');
+            drEvent.resetPreview();
+            drEvent.clearElement();
+            drEvent.settings.defaultFile = asset_gb + 'uploads/receipt_company_file/' + rec['receipt'].receipt_file;
+            drEvent.destroy();
+            drEvent.init();
+
+            btn.button("reset");
+            $('#ModalUpload').modal("show");
+        }).fail(function () {
+            swal("system.system_alert", "system.system_error", "error");
+            btn.button("reset");
+        });
+    });
+
+    $('#FormUpload').validate({
+        rules: {
+
+        },
+        messages: {
+
+        },
+        errorPlacement: function (error, element) { // คำสั่งโชกล่องข้อความ
+            error.addClass("help-block");
+            error.insertAfter(element);
+        },
+        highlight: function (element, errorClass, validClass) { // ใส่สีเมื่อเกิด error
+            $(element).closest('.form-group').addClass("has-danger");
+            $(element).addClass("form-control-danger");
+        },
+        unhighlight: function (element, errorClass, validClass) { // ใส่สีเมื่อผ่าน error แล้ว;
+            $(element).closest(".form-group").removeClass("has-danger");
+            $(element).removeClass("form-control-danger");
+        },
+        submitHandler: function (form) {
+            var btn = $(form).find('[type="submit"]');
+            var id = $('#update_upload_id').val();
+            btn.button("loading");
+            $.ajax({
+                method: "POST",
+                url: url_gb + "/receipt_company/update/update_upload/" + id,
+                dataType: 'json',
+                data: new FormData(form),
+                contentType: false,
+                cache: false,
+                processData: false,
+            }).done(function (rec) {
+                btn.button("reset");
+                if (rec.status == 1) {
+                    TableList.api().ajax.reload();
+                    form.reset();
+                    swal(rec.title, rec.content, "success");
+                    $('#ModalUpload').modal('hide');
+                } else {
+                    swal(rec.title, rec.content, "error");
+                }
+            }).fail(function () {
+                swal("Error", "System error", "error");
+                btn.button("reset");
+            });
+        }
+    });
+
+
 
 </script>
 @endsection

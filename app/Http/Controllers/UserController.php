@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller {
 
     public function index() {
-        return view('user');
+        if (\Gate::allows('isCEO')) {
+            return view('user');
+        } else {
+            abort(503);
+        }
     }
 
     public function create() {

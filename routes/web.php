@@ -28,23 +28,26 @@ Route::resource('package', App\Http\Controllers\PackageController::class)->only(
     'index', 'store', 'update', 'destroy'
 ])->name('index', 'package');
 
-Route::get('status_manage_task/get/get_datatable', [App\Http\Controllers\StatusManageTaskController::class, 'get_datatable']);
-Route::get('status_manage_task/get/get_by_id/{id}', [App\Http\Controllers\StatusManageTaskController::class, 'get_by_id']);
-Route::resource('status_manage_task', App\Http\Controllers\StatusManageTaskController::class)->only([
+Route::get('freelance/get/get_datatable', [App\Http\Controllers\FreelanceController::class, 'get_datatable']);
+Route::get('freelance/get/get_by_id/{id}', [App\Http\Controllers\FreelanceController::class, 'get_by_id']);
+Route::resource('freelance', App\Http\Controllers\FreelanceController::class)->only([
     'index', 'store', 'update', 'destroy'
-])->name('index', 'status_manage_task');
+])->name('index', 'freelance');
 
 Route::get('setting_system', [App\Http\Controllers\SettingSystemController::class, 'pade_setting'])->name('setting_system');
 Route::post('setting_system/post/update_setting/{id}', [App\Http\Controllers\SettingSystemController::class, 'update_setting']);
 
 // ฟอร์มกรอกข้อมูล
 Route::get('manage_task/get/get_datatable', [App\Http\Controllers\ManageTaskController::class, 'get_datatable']);
+Route::get('manage_task/get/get_datatable_freelance', [App\Http\Controllers\ManageTaskController::class, 'get_datatable_freelance']);
+Route::get('manage_task/get/get_datatable_package', [App\Http\Controllers\ManageTaskController::class, 'get_datatable_package']);
 Route::get('manage_task/get/get_by_id/{id}', [App\Http\Controllers\ManageTaskController::class, 'get_by_id']);
 Route::resource('manage_task', App\Http\Controllers\ManageTaskController::class)->only([
     'index', 'store', 'update', 'destroy'
 ])->name('index', 'manage_task');
 
 Route::get('customer_google_adses/get/get_datatable', [App\Http\Controllers\CustomerGoogleAdsController::class, 'get_datatable']);
+Route::get('customer_google_adses/get/get_datatable_no_service', [App\Http\Controllers\CustomerGoogleAdsController::class, 'get_datatable_no_service']);
 Route::get('customer_google_adses/get/get_by_id/{id}', [App\Http\Controllers\CustomerGoogleAdsController::class, 'get_by_id']);
 Route::resource('customer_google_adses', App\Http\Controllers\CustomerGoogleAdsController::class)->only([
     'index', 'store', 'update', 'destroy'
@@ -61,14 +64,8 @@ Route::resource('receipt', App\Http\Controllers\ReceiptController::class)->only(
 Route::get('receipt_company/get/get_datatable', [App\Http\Controllers\ReceiptCompanyController::class, 'get_datatable']);
 Route::get('receipt_company/get/get_by_id/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'get_by_id']);
 Route::post('receipt_company/update/update_data/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'update_data']);
+Route::post('receipt_company/update/update_upload/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'update_upload']);
 Route::resource('receipt_company', App\Http\Controllers\ReceiptCompanyController::class)->only([
     'index', 'store', 'update', 'destroy'
 ])->name('index', 'receipt_company');
 
-// รายงาน
-Route::get('report_manage_task', function () {
-    return view('in_progress');
-})->name('report_manage_task');
-Route::get('report_customer_google_ads', function () {
-    return view('in_progress');
-})->name('report_customer_google_ads');

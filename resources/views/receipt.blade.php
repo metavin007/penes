@@ -18,6 +18,28 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="row"> 
+                        <div class="col-lg-2">    
+                            <div class="form-group">
+                                <label style="font-weight: bold;"><b>วันที่เริ่ม : </b></label>
+                                <input type="text" id="date_search_start" class="form-control" readonly="" value="{{ date('01-m-Y') }}">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">    
+                            <div class="form-group">
+                                <label style="font-weight: bold;"><b>วันที่สิ้นสุด : </b></label>
+                                <input type="text" id="date_search_end" class="form-control" readonly="" value="{{ date('t-m-Y') }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
                             <h4 class="">ตารางจัดเก็บใบเสร็จลูกค้า</h4>
@@ -202,60 +224,90 @@
 @section('js_bottom')
 <script>
 
-    var TableList = $('#Table').dataTable({
-        // เซอเวอไซต์ต้องมี 2 อันนี้
-        "processing": true,
-        "serverSide": true,
-        // -------------------
-        scrollCollapse: true,
-        autoWidth: false,
-        responsive: true,
-        columnDefs: [{
-                targets: "datatable-nosort",
-                orderable: false,
-            }],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "language": {
-            "info": "_START_-_END_ of _TOTAL_ entries",
-            searchPlaceholder: "Search"
-        },
-        "ajax": {
-            "url": url_gb + "/receipt/get/get_datatable",
-            "data": function (d) {
-                //d.myKey = "myValue";
-                // d.custom = $('#myInput').val();
-                // etc
-            }
-        },
-        "columns": [
-            {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
-            {"data": "name","orderable": false,},
-            {"data": "file", "className": "text-center" ,"orderable": false,},
-            {"data": "receipt_date", "className": "text-center"},
-            {"data": "status", "className": "text-center"},
-            {"data": "receipt_file", "className": "text-center"},
-            {"data": "action", "className": "action text-right", "orderable": false, "searchable": false}
-        ], "order": [[3, "desc"]],
-        rowCallback: function (row, data, index) {
+    get_table_list($("#date_search_start").val(), $("#date_search_end").val());
 
-        },
-         //แก้ไขชื่อ ข้อความต่างๆ ;
-         "language": {
-    "search": "ค้นหา",
-
-     "paginate": {
-        "first":        "หน้าแรก",
-        "previous":     "ก่อนหน้า",
-        "next":         "ต่อไป",
-        "last":         "สุดท้าย"
-    },
-    "processing":       "Processing...",
-
-
-  }
-
-
+    $('#date_search_start').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoUpdateInput: false,
+        locale: {
+            format: 'DD-MM-YYYY'
+        }, minDate: 0,
     });
+    $('#date_search_end').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoUpdateInput: false,
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
+
+    $('#date_search_start').on('apply.daterangepicker', function (e, picker) {
+        $(this).val(picker.startDate.format('DD-MM-YYYY'));
+        get_table_list(picker.startDate.format('DD-MM-YYYY'), $('#date_search_end').val());
+    })
+    $('#date_search_end').on('apply.daterangepicker', function (e, picker) {
+        $(this).val(picker.startDate.format('DD-MM-YYYY'));
+        get_table_list($('#date_search_start').val(), picker.startDate.format('DD-MM-YYYY'));
+    })
+
+    var TableList;
+    function get_table_list(date_search_start, date_search_end) {
+        if (TableList != undefined) {
+            TableList.DataTable().destroy();
+        }
+        TableList = $('#Table').dataTable({
+            // เซอเวอไซต์ต้องมี 2 อันนี้
+            "processing": true,
+            "serverSide": true,
+            // -------------------
+            scrollCollapse: true,
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+            pageLength: 50,
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "info": "_START_-_END_ of _TOTAL_ entries",
+                searchPlaceholder: "Search"
+            },
+            "ajax": {
+                "url": url_gb + "/receipt/get/get_datatable",
+                "data": function (d) {
+                    d.date_search_start = date_search_start;
+                    d.date_search_end = date_search_end;
+                }
+            },
+            "columns": [
+                {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
+                {"data": "name", "orderable": false, },
+                {"data": "file", "className": "text-center", "orderable": false, },
+                {"data": "receipt_date", "className": "text-center"},
+                {"data": "status", "className": "text-center"},
+                {"data": "receipt_file", "className": "text-center"},
+                {"data": "action", "className": "action text-right", "orderable": false, "searchable": false}
+            ], "order": [[3, "desc"]],
+            rowCallback: function (row, data, index) {
+
+            },
+            //แก้ไขชื่อ ข้อความต่างๆ ;
+            "language": {
+                "search": "ค้นหา",
+
+                "paginate": {
+                    "first": "หน้าแรก",
+                    "previous": "ก่อนหน้า",
+                    "next": "ต่อไป",
+                    "last": "สุดท้าย"
+                },
+                "processing": "Processing...",
+            }
+        });
+    }
 
     $('body').on('click', '.btn-add', function (e) {
         e.preventDefault();
@@ -283,7 +335,7 @@
             name: {
                 required: true,
             },
-            price: {
+            receipt_date: {
                 required: true,
             },
         },
@@ -291,7 +343,7 @@
             name: {
                 required: "กรุณาระบุ",
             },
-            price: {
+            receipt_date: {
                 required: "กรุณาระบุ",
             },
         },
@@ -412,7 +464,7 @@
             name: {
                 required: true,
             },
-            price: {
+            receipt_date: {
                 required: true,
             },
         },
@@ -420,7 +472,7 @@
             name: {
                 required: "กรุณาระบุ",
             },
-            price: {
+            receipt_date: {
                 required: "กรุณาระบุ",
             },
         },

@@ -10,7 +10,11 @@ use App\Models\Package;
 class PackageController extends Controller {
 
     public function index() {
-        return view('package');
+        if (\Gate::allows('isCEO') || \Gate::allows('isAdmin')) {
+            return view('package');
+        } else {
+            abort(503);
+        }
     }
 
     public function create() {
@@ -116,7 +120,7 @@ class PackageController extends Controller {
                             return date('d-m-Y H:i:s', strtotime($rec->created_at));
                         })
                         ->editColumn('price', function($rec) {
-                            return number_format($rec->price,2);
+                            return number_format($rec->price, 2);
                         })
                         ->addColumn('action', function($rec) {
                             $str = '

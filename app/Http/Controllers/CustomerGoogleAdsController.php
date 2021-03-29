@@ -10,7 +10,11 @@ use App\Models\CustomerGoogleAds;
 class CustomerGoogleAdsController extends Controller {
 
     public function index() {
-        return view('customer_google_ads');
+        if (\Gate::allows('isCEO') || \Gate::allows('isAdmin')) {
+            return view('customer_google_ads');
+        } else {
+            abort(503);
+        }
     }
 
     public function create() {
@@ -62,8 +66,16 @@ class CustomerGoogleAdsController extends Controller {
 
     public function get_by_id($id) {
         $result['customer_google_ads'] = CustomerGoogleAds::find($id);
-        $result['service_end_date'] = date('d-m-Y', strtotime($result['customer_google_ads']->service_end_date));
-        $result['expired_web_date'] = date('d-m-Y', strtotime($result['customer_google_ads']->expired_web_date));
+        if ($result['customer_google_ads']->service_end_date) {
+            $result['service_end_date'] = date('d-m-Y', strtotime($result['customer_google_ads']->service_end_date));
+        } else {
+            $result['service_end_date'] = '';
+        }
+        if ($result['customer_google_ads']->expired_web_date) {
+            $result['expired_web_date'] = date('d-m-Y', strtotime($result['customer_google_ads']->expired_web_date));
+        } else {
+            $result['expired_web_date'] = '';
+        }
         return json_encode($result);
     }
 
@@ -127,14 +139,26 @@ class CustomerGoogleAdsController extends Controller {
     }
 
     public function get_datatable() {
-        $result = CustomerGoogleAds::select();
+        $result = CustomerGoogleAds::where('status', '!=', 'ไม่ต่อบริการ')->select();
         return \DataTables::of($result)
                         ->addIndexColumn()
                         ->editColumn('service_end_date', function($rec) {
-                            return DateThai($rec->service_end_date);
+                            if ($rec->service_end_date != null) {
+                                if (date('Y-m-d H:i:s', strtotime("+7 day", strtotime($rec->service_end_date))) > date('Y-m-d H:i:s')) {
+                                    return '<span style="padding: 3px; 3px;border: 3px solid red;">' . DateThai($rec->service_end_date) . '</span>';
+                                } else {
+                                    return DateThai($rec->service_end_date);
+                                }
+                            } else {
+                                return '';
+                            }
                         })
                         ->editColumn('expired_web_date', function($rec) {
-                            return DateThai($rec->expired_web_date);
+                            if ($rec->expired_web_date != null) {
+                                return DateThai($rec->expired_web_date);
+                            } else {
+                                return '';
+                            }
                         })
                         ->editColumn('price', function($rec) {
                             return number_format($rec->price);
@@ -151,7 +175,47 @@ class CustomerGoogleAdsController extends Controller {
                           <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->name . '">ลบ</button>   
                             ';
                             return $str;
-                        })->rawColumns(['action', 'manage_ads','link_web'])->make(true);
+                        })->rawColumns(['action', 'manage_ads', 'link_web', 'service_end_date'])->make(true);
+    }
+
+    public function get_datatable_no_service() {
+        $result = CustomerGoogleAds::where('status', '=', 'ไม่ต่อบริการ')->select();
+        return \DataTables::of($result)
+                        ->addIndexColumn()
+                        ->editColumn('service_end_date', function($rec) {
+                            if ($rec->service_end_date != null) {
+                                if (date('Y-m-d H:i:s', strtotime("+7 day", strtotime($rec->service_end_date))) > date('Y-m-d H:i:s')) {
+                                    return '<span style="padding: 3px; 3px;border: 3px solid red;">' . DateThai($rec->service_end_date) . '</span>';
+                                } else {
+                                    return DateThai($rec->service_end_date);
+                                }
+                            } else {
+                                return '';
+                            }
+                        })
+                        ->editColumn('expired_web_date', function($rec) {
+                            if ($rec->expired_web_date != null) {
+                                return DateThai($rec->expired_web_date);
+                            } else {
+                                return '';
+                            }
+                        })
+                        ->editColumn('price', function($rec) {
+                            return number_format($rec->price);
+                        })
+                        ->editColumn('manage_ads', function($rec) {
+                            return '<button type="button" class="btn btn-info"><a style="color:white;" href="' . $rec->manage_ads . '" target="_blank">ดูโฆษณา</a></button>';
+                        })
+                        ->editColumn('link_web', function($rec) {
+                            return '<a href="' . $rec->link_web . '" target="_blank">' . $rec->link_web . '</a>';
+                        })
+                        ->addColumn('action', function($rec) {
+                            $str = '
+                          <button type="button" class="btn btn-edit btn-warning" data-id="' . $rec->id . '">จัดการ</button>
+                          <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->name . '">ลบ</button>   
+                            ';
+                            return $str;
+                        })->rawColumns(['action', 'manage_ads', 'link_web', 'service_end_date'])->make(true);
     }
 
 }

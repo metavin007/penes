@@ -10,7 +10,11 @@ use App\Models\Receipt;
 class ReceiptController extends Controller {
 
     public function index() {
-        return view('receipt');
+        if (\Gate::allows('isCEO') || \Gate::allows('isAdmin')) {
+            return view('receipt');
+        } else {
+            abort(503);
+        }
     }
 
     public function create() {
@@ -128,6 +132,7 @@ class ReceiptController extends Controller {
             $receipt = receipt::find($id);
             if ($receipt) {
                 \File::delete(public_path('uploads/receipt/' . $receipt->file));
+                \File::delete(public_path('uploads/receipt_file/' . $receipt->receipt_file));
             }
 
             Receipt::where('id', $id)->delete();
@@ -143,8 +148,14 @@ class ReceiptController extends Controller {
         return $return;
     }
 
-    public function get_datatable() {
-        $result = Receipt::select();
+    public function get_datatable(Request $request) {
+        $date_search_start = $request->input('date_search_start');
+        $date_search_end = $request->input('date_search_end');
+        if ($date_search_start && $date_search_end) {
+            $date_search_start = date('Y-m-d', strtotime($date_search_start));
+            $date_search_end = date('Y-m-d', strtotime($date_search_end));
+        }
+        $result = Receipt::whereBetween('receipt_date', [$date_search_start, $date_search_end])->select();
         return \DataTables::of($result)
                         ->addIndexColumn()
                         ->editColumn('file', function($rec) {
@@ -182,18 +193,18 @@ class ReceiptController extends Controller {
 
                             if ($rec->status == 'ขอใบเสร็จ') {
                                 $str = '<button type="button" class="btn btn-upload btn-outline-success" data-id="' . $rec->id . '"><i class="me-2 mdi mdi-file-pdf"></i> อัพใบเสร็จ</button>';
-                                } else {
+                            } else {
                                 $str = '';
                             }
-                           
+
 
                             $str .= '
                           <button type="button" class="btn btn-edit btn-warning" data-id="' . $rec->id . '">แก้ไข</button>
                           <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->name . '">ลบ</button>   
                             ';
-                            
+
                             return $str;
-                        })->rawColumns(['file','receipt_file', 'status', 'action'])->make(true);
+                        })->rawColumns(['file', 'receipt_file', 'status', 'action'])->make(true);
     }
 
     public function update_upload(Request $request, $id) {

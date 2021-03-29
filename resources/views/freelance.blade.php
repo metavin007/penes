@@ -10,7 +10,7 @@
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/status_manage_task') }}">ตารางสถานะจัดการงาน</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/freelance') }}">ตารางฟรีแลนซ์</a></li>
             </ol>
         </div>
     </div>
@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
-                            <h4 class="card-title">ตารางสถานะจัดการงาน</h4>
+                            <h4 class="card-title">ตารางฟรีแลนซ์</h4>
                         </div>
                         <div class="col-lg-6">
                             <button class="btn float-right btn-primary btn-add"> สร้าง</button>
@@ -31,7 +31,7 @@
                             <thead>
                                 <tr>
                                     <td class="text-center">ลำดับ</td>
-                                    <td class="text-center">ชื่อ</td>
+                                    <td class="text-center">ชื่อฟรีแลนซ์</td>
                                     <td class="text-center">วันที่เพิ่มข้อมูล</td>
                                     <td class="text-center">จัดการ</td>
                                 </tr>
@@ -56,7 +56,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="add_text">ชื่อสถานะจัดการงาน</label>
+                                <label for="add_text">ชื่อฟรีแลนซ์</label>
                                 <input type="text" name="name" id="add_name" class="form-control" required="">
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="add_text">ชื่อสถานะจัดการงาน</label>
+                                <label for="add_text">ชื่อฟรีแลนซ์</label>
                                 <input type="text" name="name" id="edit_name" class="form-control" required="">
                             </div>
                         </div>
@@ -122,7 +122,7 @@
             searchPlaceholder: "Search"
         },
         "ajax": {
-            "url": url_gb + "/status_manage_task/get/get_datatable",
+            "url": url_gb + "/freelance/get/get_datatable",
             "data": function (d) {
                 //d.myKey = "myValue";
                 // d.custom = $('#myInput').val();
@@ -174,7 +174,7 @@
             btn.button("loading");
             $.ajax({
                 method: "POST",
-                url: url_gb + "/status_manage_task",
+                url: url_gb + "/freelance",
                 dataType: 'json',
                 data: $(form).serialize()
             }).done(function (rec) {
@@ -203,7 +203,7 @@
         $('#update_id').val(id);
         $.ajax({
             method: "GET",
-            url: url_gb + "/status_manage_task/get/get_by_id/" + id,
+            url: url_gb + "/freelance/get/get_by_id/" + id,
             dataType: 'json'
         }).done(function (rec) {
 
@@ -246,7 +246,7 @@
             btn.button("loading");
             $.ajax({
                 method: "PUT",
-                url: url_gb + "/status_manage_task/" + id,
+                url: url_gb + "/freelance/" + id,
                 dataType: 'json',
                 data: $(form).serialize()
             }).done(function (rec) {
@@ -287,7 +287,7 @@
             if (result.value) {
                 $.ajax({
                     method: "DELETE",
-                    url: url_gb + "/status_manage_task/" + id,
+                    url: url_gb + "/freelance/" + id,
                     data: {ID: id}
                 }).done(function (rec) {
                     if (rec.status == 1) {

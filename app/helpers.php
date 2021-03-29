@@ -5,18 +5,17 @@ function find_value_percent($value, $percent) {
     return $total;
 }
 
-function DateThai($strDate)
- {
-  $strYear = date("Y",strtotime($strDate))+543;
-  $strMonth= date("n",strtotime($strDate));
-  $strDay= date("j",strtotime($strDate));
-  $strHour= date("H",strtotime($strDate));
-  $strMinute= date("i",strtotime($strDate));
-  $strSeconds= date("s",strtotime($strDate));
-  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-  $strMonthThai=$strMonthCut[$strMonth];
-  return "$strDay $strMonthThai $strYear";
- }
+function DateThai($strDate) {
+    $strYear = date("Y", strtotime($strDate)) + 543;
+    $strMonth = date("n", strtotime($strDate));
+    $strDay = date("j", strtotime($strDate));
+    $strHour = date("H", strtotime($strDate));
+    $strMinute = date("i", strtotime($strDate));
+    $strSeconds = date("s", strtotime($strDate));
+    $strMonthCut = Array("", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+    $strMonthThai = $strMonthCut[$strMonth];
+    return "$strDay $strMonthThai $strYear";
+}
 
 function format_address_for_pdf($house_no, $address_detail, $moo, $soi, $road, $tambon, $amphur, $province, $zipcode) {
     $text = '';

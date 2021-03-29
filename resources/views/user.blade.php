@@ -80,7 +80,7 @@
                                     <option selected="" disabled="">กรุณาเลือก</option>
                                     <option value="CEO">CEO</option>
                                     <option value="Admin">Admin</option>
-                                    <option value="General">General</option>
+                                    <option value="User">User</option>
                                 </select>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                                     <option selected="" disabled="">กรุณาเลือก</option>
                                     <option value="CEO">CEO</option>
                                     <option value="Admin">Admin</option>
-                                    <option value="General">General</option>
+                                    <option value="User">User</option>
                                 </select>
                             </div>
                         </div>
