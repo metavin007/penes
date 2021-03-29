@@ -144,7 +144,7 @@ class CustomerGoogleAdsController extends Controller {
                         ->addIndexColumn()
                         ->editColumn('service_end_date', function($rec) {
                             if ($rec->service_end_date != null) {
-                                if (date('Y-m-d H:i:s', strtotime("+7 day", strtotime($rec->service_end_date))) > date('Y-m-d H:i:s')) {
+                                if (date('Y-m-d H:i:s', strtotime("-7 day", strtotime($rec->service_end_date))) < date('Y-m-d H:i:s')) {
                                     return '<span style="padding: 3px; 3px;border: 3px solid red;">' . DateThai($rec->service_end_date) . '</span>';
                                 } else {
                                     return DateThai($rec->service_end_date);
@@ -184,7 +184,7 @@ class CustomerGoogleAdsController extends Controller {
                         ->addIndexColumn()
                         ->editColumn('service_end_date', function($rec) {
                             if ($rec->service_end_date != null) {
-                                if (date('Y-m-d H:i:s', strtotime("+7 day", strtotime($rec->service_end_date))) > date('Y-m-d H:i:s')) {
+                                if (date('Y-m-d H:i:s', strtotime("-7 day", strtotime($rec->service_end_date))) < date('Y-m-d H:i:s')) {
                                     return '<span style="padding: 3px; 3px;border: 3px solid red;">' . DateThai($rec->service_end_date) . '</span>';
                                 } else {
                                     return DateThai($rec->service_end_date);
