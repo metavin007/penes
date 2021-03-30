@@ -51,12 +51,21 @@
                                     <button class="btn btn-info btn-block text-uppercase waves-effect waves-light" type="submit">ล็อกอิน</button>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                {!! NoCaptcha::renderJs() !!}
+                                {!! NoCaptcha::display() !!}
+                            </div>
                             @error('email')
                             <div class="alert alert-danger">
                                 {{ $message }}
                             </div>
                             @enderror
                             @error('password')
+                            <div class="alert alert-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            @error('g-recaptcha-response')
                             <div class="alert alert-danger">
                                 {{ $message }}
                             </div>

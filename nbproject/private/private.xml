@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/universe_coding/resources/views/receipt_company.blade.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/app/Http/Kernel.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/app/Http/Controllers/ReceiptCompanyController.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/resources/views/receipt.blade.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/app/Http/Controllers/ReceiptController.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/app/Http/Controllers/CustomerGoogleAdsController.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/app/helpers.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/resources/views/layouts/app_layout.blade.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/app/Http/Middleware/CheckPermission.php</file>
-            <file>file:/C:/xampp/htdocs/universe_coding/app/Http/Controllers/ManageTaskController.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
