@@ -117,7 +117,7 @@ class FreelanceController extends Controller {
         return \DataTables::of($result)
                         ->addIndexColumn()
                         ->editColumn('created_at', function($rec) {
-                            return date('d-m-Y H:i:s', strtotime($rec->created_at));
+							       return DateThai($rec->created_at);
                         })
                         ->addColumn('action', function($rec) {
                             $str = '

@@ -1,1 +1,1 @@
-<footer class="footer"> © 2021 Develop by KunChai O Lism </footer>
+<footer class="footer">  </footer>

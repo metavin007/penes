@@ -137,6 +137,9 @@ class ManageTaskController extends Controller {
                         ->editColumn('price', function($rec) {
                             return number_format($rec->price, 2);
                         })
+					 ->editColumn('amount_like', function($rec) {
+                            return number_format($rec->amount_like);
+                        })
                         ->editColumn('link_page', function($rec) {
                             return '<a href="' . $rec->link_page . '" target="_blank">' . $rec->link_page . '</a>';
                         })
@@ -159,7 +162,16 @@ class ManageTaskController extends Controller {
         $result = ManageTask::whereBetween('pade_date', [$date_search_start, $date_search_end])->groupBy('freelance')
                 ->selectRaw('freelance, sum(amount_image) as sum_amount_image')
                 ->get();
-        return \DataTables::of($result)->make(true);
+        return \DataTables::of($result)
+         ->addColumn('sum_price_image', function($rec) {
+                            if($rec->freelance == 'แก้ม'){
+return number_format($rec->sum_amount_image*203.3333) ."  บาท";
+                            }else{
+                                return '-';
+                            }
+                            
+                        })
+        ->make(true);
     }
 
     public function get_datatable_package(Request $request) {

@@ -10,7 +10,7 @@
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/receipt') }}">ตารางจัดเก็บใบเสร็จลูกค้า</a></li>
+                <!-- <li class="breadcrumb-item"><a href="{{ url('/receipt') }}">ตารางเก็บสลิปลูกค้า</a></li> -->
             </ol>
         </div>
     </div>
@@ -21,13 +21,13 @@
                     <div class="row"> 
                         <div class="col-lg-2">    
                             <div class="form-group">
-                                <label style="font-weight: bold;"><b>วันที่เริ่ม : </b></label>
+                                <label style="font-weight: bold;"><b>แสดงข้อมูลของวันที่ <i class="me-2 mdi mdi-calendar-clock"></i></b></label>
                                 <input type="text" id="date_search_start" class="form-control" readonly="" value="{{ date('01-m-Y') }}">
                             </div>
                         </div>
                         <div class="col-lg-2">    
                             <div class="form-group">
-                                <label style="font-weight: bold;"><b>วันที่สิ้นสุด : </b></label>
+                                <label style="font-weight: bold;"><b>จนถึงวันที่ <i class="me-2 mdi mdi-calendar-clock"></i> </b></label>
                                 <input type="text" id="date_search_end" class="form-control" readonly="" value="{{ date('t-m-Y') }}">
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             <h4 class="">ตารางจัดเก็บใบเสร็จลูกค้า</h4>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn float-right btn btn-info btn-add btn-lg"> <i class="me-2 mdi mdi-plus-circle"></i> สร้าง</button>
+                             <button class="btn float-right btn btn-info btn-add btn-lg"> <i class="me-2 mdi mdi-plus-circle"></i> สร้าง</button>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -109,8 +109,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                    <button type="submit" class="btn btn-success btn-lg btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger btdel-red" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-success btsave-g">บันทึก</button>
                 </div>
             </form>
         </div>
@@ -159,8 +159,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                    <button type="submit" class="btn btn-success btn-lg btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger btdel-red" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-success btsave-g">บันทึก</button>
                 </div>
             </form>
         </div>
@@ -211,8 +211,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                    <button type="submit" class="btn btn-success btn-lg btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger btdel-red" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-success btsave-g">บันทึก</button>
                 </div>
             </form>
         </div>
@@ -270,11 +270,8 @@
                     orderable: false,
                 }],
             pageLength: 50,
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "language": {
-                "info": "_START_-_END_ of _TOTAL_ entries",
-                searchPlaceholder: "Search"
-            },
+            "lengthMenu": [[ 50, -1], [50, "ทั้งหมด"]],
+            
             "ajax": {
                 "url": url_gb + "/receipt/get/get_datatable",
                 "data": function (d) {
@@ -293,21 +290,15 @@
             ], "order": [[3, "desc"]],
             rowCallback: function (row, data, index) {
 
-            },
-            //แก้ไขชื่อ ข้อความต่างๆ ;
-            "language": {
-                "search": "ค้นหา",
-
-                "paginate": {
-                    "first": "หน้าแรก",
-                    "previous": "ก่อนหน้า",
-                    "next": "ต่อไป",
-                    "last": "สุดท้าย"
-                },
-                "processing": "Processing...",
-            }
+              }
+            
         });
     }
+
+
+
+
+
 
     $('body').on('click', '.btn-add', function (e) {
         e.preventDefault();

@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" type="image/png" sizes="16x16" href="https://amworkweb.com/wp-content/uploads/2019/07/FA-icon.png">
-        <title> บริษัท ยูนิเวิร์ส โค้ดดิ้ง แอนด์ ดีไซน์ จำกัด (สำนักงานใหญ่) </title>
+        <title>โปรแกรม บริษัท ยูนิเวิร์สโค้ดดิ้งแอนด์ดีไซน์ จำกัด (สำนักงานใหญ่) </title>
         <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -58,7 +58,7 @@
         <script src="{{ asset('plugins/dropify/dist/js/dropify.js') }}"></script>
  
         <!--js ของ datatable-->
-        <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>
+        <script src="{{ asset('plugins/datatables/datatables.js') }}"></script>
         <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>

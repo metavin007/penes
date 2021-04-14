@@ -3,12 +3,21 @@
 @section('css_bottom')
 <style>
     .row_success_1{
-        color: #fff;
-        background-color: #00b99c;
+        color: #01c0c8;
+        background-color: #effff1;
     }
     .row_success_2{
-        color: #fff;
-        background-color: #00b99c;
+        color: #16c0c8;
+        background-color: #effff1;
+    }
+	.row_success_3{
+    color: #ffffff;
+    background-color: #55ce63;
+    text-shadow: 2px 1px 5px #ba7d00;
+    }
+
+    .fsize-s{
+            font-size: xx-small;
     }
 </style>
 @endsection
@@ -19,7 +28,7 @@
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/manage_task') }}">ตารางจัดการงาน</a></li>
+                <!-- <li class=""><h4 >ตารางวางแผนการทำงาน</h4></li> -->
             </ol>
         </div>
     </div>
@@ -30,13 +39,13 @@
                     <div class="row"> 
                         <div class="col-lg-2">    
                             <div class="form-group">
-                                <label style="font-weight: bold;"><b>วันที่เริ่ม : </b></label>
+                                <label style="font-weight: bold;"><b>แสดงข้อมูลของวันที่ <i class="me-2 mdi mdi-calendar-clock"></i></b></label>
                                 <input type="text" id="date_search_start" class="form-control" readonly="" value="{{ date('01-m-Y') }}">
                             </div>
                         </div>
                         <div class="col-lg-2">    
                             <div class="form-group">
-                                <label style="font-weight: bold;"><b>วันที่สิ้นสุด : </b></label>
+                                <label style="font-weight: bold;"><b>จนถึงวันที่ <i class="me-2 mdi mdi-calendar-clock"></i> </b></label>
                                 <input type="text" id="date_search_end" class="form-control" readonly="" value="{{ date('t-m-Y') }}">
                             </div>
                         </div>
@@ -51,10 +60,10 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
-                            <h4 class="card-title">ตารางวางแผนการทำงาน</h4>
+                            <h4 class="">ตารางวางแผนการทำงาน</h4>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn float-right btn-primary btn-add"> สร้าง</button>
+                          <button class="btn float-right btn btn-info btn-add btn-lg"> <i class="me-2 mdi mdi-plus-circle"></i> สร้าง</button>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -69,9 +78,9 @@
                                     <td class="text-center">จำนวนภาพ</td>
                                     <td class="text-center">สถานะภาพ</td>
                                     <td class="text-center">จัดการ</td>
-                                    <td class="text-center">ลิงค์เพจ</td>
                                     <td class="text-center">จำนวนไลค์</td>
                                     <td class="text-center">สถานะไลค์</td>
+                                     <td class="text-center" style="font-size: medium;">ลิงค์เพจ</td>
                                     <td class="text-center">สรุปงานทั้งหมด</td>
                                 </tr>
                             </thead>
@@ -86,8 +95,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2">
-                        <div class="col-lg-4">
-                            <h4 class="card-title">ตารางสรุปคนทำงาน</h4>
+                        <div class="col-lg-12">
+                            <h4 class="">ตารางสรุปคนทำงาน</h4>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -95,7 +104,8 @@
                             <thead>
                                 <tr>
                                     <td class="text-center">คนทำงาน</td>
-                                    <td class="text-center">จำนวน</td>
+                                    <td class="text-center">จำนวนภาพ</td>
+                                    <td class="text-center">จำนเงิน</td>
                                 </tr>
                             </thead>
                         </table>
@@ -107,8 +117,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2">
-                        <div class="col-lg-4">
-                            <h4 class="card-title">ตารางสรุปขายแพ็คเกจ</h4>
+                        <div class="col-lg-12">
+                            <h4 class="">ตารางแพ็คเกจขายดี</h4>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -116,7 +126,7 @@
                             <thead>
                                 <tr>
                                     <td class="text-center">แพ็คเกจ</td>
-                                    <td class="text-center">จำนวน</td>
+                                    <td class="text-center">จำนวนงาน</td>
                                 </tr>
                             </thead>
                         </table>
@@ -131,7 +141,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">เพิ่ม</h3>
+                <h3 class="" id="myLargeModalLabel">สร้าง</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form id="FormAdd">
@@ -153,7 +163,7 @@
                             <div class="form-group">
                                 <label for="add_package">แพ็คเกจ</label>
                                 <select class="form-control error_put_border package" style="width: 100%;" name="package" id="add_package">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">เลือกแพ็คเกจ</option>
                                     @foreach($packages as $package)      
                                     <option value="{{ $package->name }}" data-price="{{ $package->price }}">{{ $package->name }}</option>     
                                     @endforeach
@@ -164,7 +174,7 @@
                             <div class="form-group">
                                 <label for="add_freelance">คนทำงาน</label>
                                 <select class="form-control error_put_border package" style="width: 100%;" name="freelance" id="add_freelance">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">เลือกคนทำงาน</option>
                                     @foreach($freelances as $freelance)      
                                     <option value="{{ $freelance->name }}" >{{ $freelance->name }}</option>     
                                     @endforeach
@@ -179,42 +189,50 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_status_image">สถานะภาพ</label>
+                                <label for="add_status_image">สถานะงานภาพ</label>
                                 <select name="status_image" id="add_status_image" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ค่าเริ่มต้น</option>
                                     <option value="ดำเนินการ">ดำเนินการ</option>
                                     <option value="รอแก้ภาพ">รอแก้ภาพ</option>
                                     <option value="ภาพครบแล้ว">ภาพครบแล้ว</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <hr style="border-style: dashed;
+    border-color: #c3c3c3;
+    border-width: 1px;
+    width: 75%;">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="add_link_page">ลิงค์เพจ</label>
                                 <input type="text" name="link_page" id="add_link_page" class="form-control">
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="add_amount_like">จำนวนไลค์</label>
                                 <input type="number" name="amount_like" id="add_amount_like" class="form-control text-right">
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="add_status_like">สถานะไลค์</label>
                                 <select name="status_like" id="add_status_like" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ค่าเริ่มต้น</option>
                                     <option value="ดำเนินการ">ดำเนินการ</option>
-                                    <option value="ไลน์ครบแล้ว">ไลน์ครบแล้ว</option>
+                                    <option value="ไลค์ครบแล้ว">ไลค์ครบแล้ว</option>
                                 </select>
                             </div>
                         </div>
+                        <hr style="border-style: dashed;
+    border-color: #c3c3c3;
+    border-width: 1px;
+    width: 40%;">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="add_status_work">สรุปงาน</label>
+                                <label for="add_status_work">สรุปงาน(ขั้นสุดท้าย)</label>
                                 <select name="status_work" id="add_status_work" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ค่าเริ่มต้น</option>
                                     <option value="ดำเนินการ">ดำเนินการ</option>
                                     <option value="กำลังยิงโฆษณา">กำลังยิงโฆษณา</option>
                                     <option value="งานสำเร็จแล้ว">งานสำเร็จแล้ว</option>
@@ -224,8 +242,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                    <button type="submit" class="btn btn-success btn-lg btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger btdel-red" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-success btsave-g">บันทึก</button>
                 </div>
             </form>
         </div>
@@ -236,7 +254,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">แก้ไข</h3>
+                <h3 class="" id="myLargeModalLabel">แก้ไข</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_id">
@@ -259,7 +277,7 @@
                             <div class="form-group">
                                 <label for="edit_package">แพ็คเกจ</label>
                                 <select class="form-control error_put_border package" style="width: 100%;" name="package" id="edit_package">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">เลือกแพ็คเกจ</option>
                                     @foreach($packages as $package)      
                                     <option value="{{ $package->name }}" data-price="{{ $package->price }}">{{ $package->name }}</option>     
                                     @endforeach
@@ -270,7 +288,7 @@
                             <div class="form-group">
                                 <label for="edit_freelance">คนทำงาน</label>
                                 <select class="form-control error_put_border package" style="width: 100%;" name="freelance" id="edit_freelance">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">เลือกคนทำงาน</option>
                                     @foreach($freelances as $freelance)      
                                     <option value="{{ $freelance->name }}" >{{ $freelance->name }}</option>     
                                     @endforeach
@@ -287,40 +305,49 @@
                             <div class="form-group">
                                 <label for="edit_status_image">สถานะภาพ</label>
                                 <select name="status_image" id="edit_status_image" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ค่าเริ่มต้น</option>
                                     <option value="ดำเนินการ">ดำเนินการ</option>
                                     <option value="รอแก้ภาพ">รอแก้ภาพ</option>
                                     <option value="ภาพครบแล้ว">ภาพครบแล้ว</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+   <hr style="border-style: dashed;
+    border-color: #c3c3c3;
+    border-width: 1px;
+    width: 75%;">
+
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="edit_link_page">ลิงค์เพจ</label>
                                 <input type="text" name="link_page" id="edit_link_page" class="form-control">
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="edit_amount_like">จำนวนไลค์</label>
                                 <input type="number" name="amount_like" id="edit_amount_like" class="form-control text-right">
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="edit_status_like">สถานะไลค์</label>
                                 <select name="status_like" id="edit_status_like" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ค่าเริ่มต้น</option>
                                     <option value="ดำเนินการ">ดำเนินการ</option>
-                                    <option value="ไลน์ครบแล้ว">ไลน์ครบแล้ว</option>
+                                    <option value="ไลค์ครบแล้ว">ไลค์ครบแล้ว</option>
                                 </select>
                             </div>
                         </div>
+                           <hr style="border-style: dashed;
+    border-color: #c3c3c3;
+    border-width: 1px;
+    width: 40%;">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="edit_status_work">สรุปงาน</label>
+                                <label for="edit_status_work">สรุปงาน (ขั้นตอนสุดท้าย)</label>
                                 <select name="status_work" id="edit_status_work" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="" selected="">ค่าเริ่มต้น</option>
                                     <option value="ดำเนินการ">ดำเนินการ</option>
                                     <option value="กำลังยิงโฆษณา">กำลังยิงโฆษณา</option>
                                     <option value="งานสำเร็จแล้ว">งานสำเร็จแล้ว</option>
@@ -330,13 +357,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-                    <button type="submit" class="btn btn-success btn-lg btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger btdel-red" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-success btsave-g">บันทึก</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
 
 @endsection
 
@@ -395,11 +424,8 @@
                     orderable: false,
                 }],
             pageLength: 50,
-            "lengthMenu": [[10, 30, 50, -1], [10, 30, 50, "All"]],
-            "language": {
-                "info": "_START_-_END_ of _TOTAL_ entries",
-                searchPlaceholder: "Search"
-            },
+            "lengthMenu": [[50, -1], [50, "ทั้งหมด"]],
+            
             "ajax": {
                 "url": url_gb + "/manage_task/get/get_datatable",
                 "data": function (d) {
@@ -411,22 +437,27 @@
                 {"data": "DT_RowIndex", "className": "text-center status_image", "orderable": false, "searchable": false},
                 {"data": "pade_date", "className": "text-center status_image"},
                 {"data": "pade_name", "className": "text-left status_image", "orderable": false},
-                {"data": "package", "className": "text-left status_image", "orderable": false},
+                {"data": "package", "className": "text-center status_image", "orderable": false},
                 {"data": "freelance", "className": "text-center status_image", "orderable": false},
                 {"data": "amount_image", "className": "text-center status_image", "orderable": false},
                 {"data": "status_image", "className": "text-center status_image"},
                 {"data": "action", "className": "action text-center", "orderable": false, "searchable": false},
-                {"data": "link_page", "className": "text-center status_work", "orderable": false},
-                {"data": "amount_like", "className": "text-center status_work", "orderable": false},
-                {"data": "status_like", "className": "text-center status_work"},
-                {"data": "status_work", "className": "text-center status_work"},
+                
+                {"data": "amount_like", "className": "text-center status_like"},
+                {"data": "status_like", "className": "text-center status_like", "orderable": false},
+                {"data": "link_page", "className": "text-center status_like fsize-s", "orderable": false},
+
+                {"data": "status_work", "className": "text-center status_work", "orderable": false},
             ], "order": [[1, "desc"]],
             rowCallback: function (row, data, index) {
                 if (data['status_image'] === 'ภาพครบแล้ว') {
                     $(row).find('.status_image').addClass('row_success_1');
                 }
-                if (data['status_work'] === 'งานสำเร็จแล้ว') {
-                    $(row).find('.status_work').addClass('row_success_2');
+                if (data['status_like'] === 'ไลค์ครบแล้ว') {
+                    $(row).find('.status_like').addClass('row_success_2');
+                }
+				if (data['status_work'] === 'งานสำเร็จแล้ว') {
+                    $(row).find('.status_work').addClass('row_success_3');
                 }
             }, drawCallback: function () {
             }
@@ -451,11 +482,8 @@
                     orderable: false,
                 }],
             pageLength: 50,
-            "lengthMenu": [[10, 30, 50, -1], [10, 30, 50, "All"]],
-            "language": {
-                "info": "_START_-_END_ of _TOTAL_ entries",
-                searchPlaceholder: "Search"
-            },
+            "lengthMenu": [[50, -1], [50, "ทั้งหมด"]],
+            
             "ajax": {
                 "url": url_gb + "/manage_task/get/get_datatable_freelance",
                 "data": function (d) {
@@ -463,9 +491,12 @@
                     d.date_search_end = date_search_end;
                 }
             },
+
+           
             "columns": [
-                {"data": "freelance", "className": "text-center", "orderable": false},
-                {"data": "sum_amount_image", "className": "text-center"},
+                {"data": "freelance", "className": "text-center", },
+                {"data": "sum_amount_image", "className": "text-center","orderable": false},
+                {"data": "sum_price_image", "className": "text-center","orderable": false},
             ], "order": [[1, "desc"]]
         });
     }
@@ -488,11 +519,8 @@
                     orderable: false,
                 }],
             pageLength: 50,
-            "lengthMenu": [[10, 30, 50, -1], [10, 30, 50, "All"]],
-            "language": {
-                "info": "_START_-_END_ of _TOTAL_ entries",
-                searchPlaceholder: "Search"
-            },
+            "lengthMenu": [[10, 30, 50, -1], [10, 30, 50, "ทั้งหมด"]],
+        
             "ajax": {
                 "url": url_gb + "/manage_task/get/get_datatable_package",
                 "data": function (d) {
@@ -501,8 +529,8 @@
                 }
             },
             "columns": [
-                {"data": "package", "className": "text-center", "orderable": false},
-                {"data": "sum_amount_package", "className": "text-center"},
+                {"data": "package", "className": "text-center"},
+                {"data": "sum_amount_package", "className": "text-center", "orderable": false},
             ], "order": [[1, "desc"]]
         });
 

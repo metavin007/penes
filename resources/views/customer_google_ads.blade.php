@@ -30,7 +30,7 @@
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/customer_google_ads') }}">ตารางลูกค้า google ads</a></li>
+                <!-- <li class="breadcrumb-item"><a href="{{ url('/customer_google_ads') }}">ตารางลูกค้า google ads</a></li> -->
             </ol>
         </div>
     </div>
@@ -43,7 +43,7 @@
                             <h4 class=""> ตารางลูกค้า Google Ads </h4>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn float-right btn-info btn-add btn-lg"> สร้าง</button>
+                             <button class="btn float-right btn btn-info btn-add btn-lg"> <i class="me-2 mdi mdi-plus-circle"></i> สร้าง</button>
                         </div>
                     </div>
                     <div class="table-responsive m-t-40">
@@ -59,8 +59,8 @@
                                     <td class="text-center">สถานะ</td>
                                     <td class="text-center">จัดการโฆษณา</td>
                                     <td class="text-center">จัดการ</td>
-                                    <td class="text-center">ชื่อเว๊ป</td>
-                                    <td class="text-center">วันหมดอายุเว๊ปไซด์</td>
+                                    <td class="text-center">ชื่อเว็บ</td>
+                                    <td class="text-center">วันหมดอายุเว็บไซด์</td>
                                 </tr>
                             </thead>
                         </table>
@@ -94,8 +94,8 @@
                                     <td class="text-center">สถานะ</td>
                                     <td class="text-center">จัดการโฆษณา</td>
                                     <td class="text-center">จัดการ</td>
-                                    <td class="text-center">ชื่อเว๊ป</td>
-                                    <td class="text-center">วันหมดอายุเว๊ปไซด์</td>
+                                    <td class="text-center">ชื่อเว็บ</td>
+                                    <td class="text-center">วันหมดอายุเว็บไซด์</td>
                                 </tr>
                             </thead>
                         </table>
@@ -173,7 +173,7 @@
                             <div class="form-group">
                                 <label for="add_status">สถานะ</label>
                                 <select name="status" id="add_status" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="ไม่เลือก" selected="">ค่าเริ่มต้น</option>
                                     <option value="แจ้งเติมเงิน">แจ้งเติมเงิน</option>
                                     <option value="แจ้งต่อบริการ">แจ้งต่อบริการ</option>
                                     <option value="ชำระแล้ว">ชำระแล้ว</option>
@@ -260,7 +260,7 @@
                             <div class="form-group">
                                 <label for="edit_status">สถานะ</label>
                                 <select name="status" id="edit_status" class="form-control">
-                                    <option value="" selected="">ไม่เลือก</option>
+                                    <option value="ไม่เลือก" selected="">ไม่เลือก</option>
                                     <option value="แจ้งเติมเงิน">แจ้งเติมเงิน</option>
                                     <option value="แจ้งต่อบริการ">แจ้งต่อบริการ</option>
                                     <option value="ชำระแล้ว">ชำระแล้ว</option>
@@ -298,11 +298,8 @@
                 orderable: false,
             }],
         pageLength: 50,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "language": {
-            "info": "_START_-_END_ of _TOTAL_ entries",
-            searchPlaceholder: "Search"
-        },
+        "lengthMenu": [[50, -1], [ 50, "ดูทั้งหมด"]],
+        
         "ajax": {
             "url": url_gb + "/customer_google_adses/get/get_datatable",
             "data": function (d) {
@@ -317,7 +314,7 @@
             {"data": "price", "className": "text-right", "orderable": false},
             {"data": "prepay", "className": "text-center", "orderable": false},
             {"data": "service_end_date", "className": "text-center"},
-            {"data": "contact", "className": "text-left", "orderable": false},
+            {"data": "contact", "className": "text-left"},
             {"data": "status", "className": "text-center"},
             {"data": "manage_ads", "className": "text-center", "orderable": false},
             {"data": "action", "className": "action text-center", "orderable": false, "searchable": false},
@@ -350,11 +347,8 @@
                 orderable: false,
             }],
         pageLength: 50,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "language": {
-            "info": "_START_-_END_ of _TOTAL_ entries",
-            searchPlaceholder: "Search"
-        },
+        "lengthMenu": [[50, -1], [50, "ดูทั้งหมด"]],
+       
         "ajax": {
             "url": url_gb + "/customer_google_adses/get/get_datatable_no_service",
             "data": function (d) {

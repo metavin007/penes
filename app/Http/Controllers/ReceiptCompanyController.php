@@ -29,11 +29,11 @@ class ReceiptCompanyController extends Controller {
             $input_all['receipt_date'] = date('Y-m-d', strtotime($input_all['receipt_date']));
         }
 
-        $dir = 'uploads/receipt_company/';
-        if (isset($input_all['file'])) {
-            $extension_file = $request->file('file')->getClientOriginalExtension();
-            $input_all['file'] = uniqid() . '_' . time() . '.' . $extension_file;
-            $request->file('file')->move($dir, $input_all['file']);
+        $dir = 'uploads/file_doc_1/';
+        if (isset($input_all['file_doc_1'])) {
+            $extension_file = $request->file('file_doc_1')->getClientOriginalExtension();
+            $input_all['file_doc_1'] = uniqid() . '_' . time() . '.' . $extension_file;
+            $request->file('file_doc_1')->move($dir, $input_all['file_doc_1']);
         }
 
         $input_all['created_at'] = date('Y-m-d H:i:s');
@@ -81,15 +81,15 @@ class ReceiptCompanyController extends Controller {
             $input_all['receipt_date'] = date('Y-m-d', strtotime($input_all['receipt_date']));
         }
 
-        $dir = 'uploads/receipt_company/';
-        if (isset($input_all['file'])) {
-            $extension_file = $request->file('file')->getClientOriginalExtension();
-            $input_all['file'] = uniqid() . '_' . time() . '.' . $extension_file;
-            $request->file('file')->move($dir, $input_all['file']);
+        $dir = 'uploads/file_doc_1/';
+        if (isset($input_all['file_doc_1'])) {
+            $extension_file = $request->file('file_doc_1')->getClientOriginalExtension();
+            $input_all['file_doc_1'] = uniqid() . '_' . time() . '.' . $extension_file;
+            $request->file('file_doc_1')->move($dir, $input_all['file_doc_1']);
 
-            $receipt = receipt::find($id);
+            $receipt = ReceiptCompany::find($id);
             if ($receipt) {
-                \File::delete(public_path('uploads/receipt_company/' . $receipt->file));
+                \File::delete(public_path('uploads/file_doc_1/' . $receipt->file_doc_1));
             }
         }
 
@@ -131,8 +131,9 @@ class ReceiptCompanyController extends Controller {
 
             $receipt = ReceiptCompany::find($id);
             if ($receipt) {
-                \File::delete(public_path('uploads/receipt_company/' . $receipt->file));
-                \File::delete(public_path('uploads/receipt_company_file/' . $receipt->receipt_file));
+                \File::delete(public_path('uploads/file_doc_1/' . $receipt->file_doc_1));
+                \File::delete(public_path('uploads/file_doc_2/' . $receipt->file_doc_2));
+                \File::delete(public_path('uploads/file_doc_3/' . $receipt->file_doc_3));
             }
 
             ReceiptCompany::where('id', $id)->delete();
@@ -158,11 +159,11 @@ class ReceiptCompanyController extends Controller {
         $result = ReceiptCompany::whereBetween('receipt_date', [$date_search_start, $date_search_end])->select();
         return \DataTables::of($result)
                         ->addIndexColumn()
-                        ->editColumn('file', function($rec) {
-                            if ($rec->file) {
+                        ->editColumn('file_doc_1', function($rec) {
+                            if ($rec->file_doc_1) {
                                 $str = '
                           <button type="button" class="btn btn-look_pic btn-info" data-id="' . $rec->id . '"><i class="me-2 mdi mdi-eye"></i> ดูภาพ</button>
-                          <button type="button" class="btn btn-info"><a style="color:white;" href="' . asset('uploads/receipt_company/' . $rec->file) . '" download=""><i class="me-2 mdi mdi-download"></i>ดาวห์โหลด</a></button>   
+                          <button type="button" class="btn btn-info"><a style="color:white;" href="' . asset('uploads/file_doc_1/' . $rec->file_doc_1) . '" download=""><i class="me-2 mdi mdi-download"></i>ดาวน์โหลดสลิป</a></button>   
                             ';
                             } else {
                                 $str = '';
@@ -172,10 +173,26 @@ class ReceiptCompanyController extends Controller {
                         ->editColumn('receipt_date', function($rec) {
                             return DateThai($rec->receipt_date);
                         })
-                        ->editColumn('receipt_file', function($rec) {
-                            if ($rec->receipt_file) {
+                        ->editColumn('file_doc_2', function($rec) {
+                            if ($rec->file_doc_2) {
+                                if ($rec->status == 'บุคคคลทั่วไป') {
+                                    $str = '
+                                        <button type="button" class="btn btn-info" "><a style="color:white;" href="' . asset('uploads/file_doc_2/' . $rec->file_doc_2) . '" download=""><i class="me-2 mdi mdi-download"></i>ดาวน์โหลดเอกสาร </a></button>   
+                                    ';
+                                } else {
+                                    $str = '
+                                        <button type="button" class="btn btn-info" "><a style="color:white;" href="' . asset('uploads/file_doc_2/' . $rec->file_doc_2) . '" download=""><i class="me-2 mdi mdi-download"></i>ดาวน์โหลดเอกสาร </a></button>   
+                                    ';
+                                }
+                            } else {
+                                $str = '';
+                            }
+                            return $str;
+                        })
+                        ->editColumn('file_doc_3', function($rec) {
+                            if ($rec->file_doc_3) {
                                 $str = '
-                                        <button type="button" class="btn btn-success" "><a style="color:white;" href="' . asset('uploads/receipt_company_file/' . $rec->receipt_file) . '" download=""><i class="me-2 mdi mdi-download"></i>โหลดใบเสร็จ </a></button>   
+                                    <button type="button" class="btn btn-success" "><a style="color:white;" href="' . asset('uploads/file_doc_3/' . $rec->file_doc_3) . '" download=""><i class="me-2 mdi mdi-download"></i>ดาวน์โหลดใบหักณที่จ่าย </a></button>   
                                     ';
                             } else {
                                 $str = '';
@@ -183,43 +200,37 @@ class ReceiptCompanyController extends Controller {
                             return $str;
                         })
                         ->editColumn('status', function($rec) {
-                            if ($rec->status == 'ขอใบเสร็จ') {
-                                return '<div role="alert" style ="color: #0e7b1b ;">ขอใบเสร็จ</div>';
+                            if ($rec->status) {
+                                return $rec->status;
                             } else {
                                 return '';
                             }
                         })
                         ->addColumn('action', function($rec) {
-
-                            if ($rec->status == 'ขอใบเสร็จ') {
-                                $str = '<button type="button" class="btn btn-upload btn-outline-success" data-id="' . $rec->id . '"><i class="me-2 mdi mdi-file-pdf"></i> อัพใบเสร็จ</button>';
-                            } else {
-                                $str = '';
-                            }
-
-
-                            $str .= '
+                            $str = '
+                          <button type="button" class="btn btn-upload_doc_2 btn-outline-success" data-id="' . $rec->id . '"><i class="me-2 mdi mdi-file-pdf"></i>อัพเอกสาร</button>      
+                          <button type="button" class="btn btn-upload_doc_3 btn-outline-success" data-id="' . $rec->id . '"><i class="me-2 mdi mdi-file-pdf"></i>อัพใบหักณที่จ่าย</button>      
                           <button type="button" class="btn btn-edit btn-warning" data-id="' . $rec->id . '">แก้ไข</button>
                           <button type="button" class="btn btn-delete btn-danger" data-id="' . $rec->id . '" data-name="' . $rec->name . '">ลบ</button>   
                             ';
 
                             return $str;
-                        })->rawColumns(['file', 'receipt_file', 'status', 'action'])->make(true);
+                        })->rawColumns(['file_doc_1', 'file_doc_2', 'file_doc_3', 'status', 'action'])->make(true);
     }
 
-    public function update_upload(Request $request, $id) {
+    public function update_upload_file_doc_2(Request $request, $id) {
 
         $input_all = $request->all();
 
-        $dir = 'uploads/receipt_company_file/';
-        if (isset($input_all['receipt_file'])) {
-            $extension_file = $request->file('receipt_file')->getClientOriginalExtension();
-            $input_all['receipt_file'] = uniqid() . '_' . time() . '.' . $extension_file;
-            $request->file('receipt_file')->move($dir, $input_all['receipt_file']);
+        $dir = 'uploads/file_doc_2/';
+        if (isset($input_all['file_doc_2'])) {
+            $extension_file = $request->file('file_doc_2')->getClientOriginalExtension();
+            $input_all['file_doc_2'] = uniqid() . '_' . time() . '.' . $extension_file;
+            $request->file('file_doc_2')->move($dir, $input_all['file_doc_2']);
 
             $receipt = ReceiptCompany::find($id);
-            if ($receipt && $receipt->receipt_file) {
-                \File::delete(public_path('uploads/receipt_company_file/' . $receipt->receipt_file));
+            if ($receipt && $receipt->file_doc_2) {
+                \File::delete(public_path('uploads/file_doc_2/' . $receipt->file_doc_2));
             }
         }
 
@@ -230,7 +241,54 @@ class ReceiptCompanyController extends Controller {
 //                    'name' => 'required',
         ]);
 
-        $return['title'] = 'แก้ไขข้อมูล';
+        $return['title'] = 'อัพโหลดข้อมูล';
+
+        if ($validator->fails()) {
+            $return['status'] = 0;
+            $return['content'] = $validator->errors()->first();
+            return $return;
+        }
+
+        \DB::beginTransaction();
+        try {
+
+            ReceiptCompany::where('id', $id)->update($input_all);
+
+            \DB::commit();
+            $return['status'] = 1;
+            $return['content'] = 'สำเร็จ';
+        } catch (Exception $e) {
+            \DB::rollBack();
+            $return['status'] = 0;
+            $return['content'] = 'ติด Validation : ' . json_encode($validator->failed());
+        }
+        return $return;
+    }
+
+    public function update_upload_file_doc_3(Request $request, $id) {
+
+        $input_all = $request->all();
+
+        $dir = 'uploads/file_doc_3/';
+        if (isset($input_all['file_doc_3'])) {
+            $extension_file = $request->file('file_doc_3')->getClientOriginalExtension();
+            $input_all['file_doc_3'] = uniqid() . '_' . time() . '.' . $extension_file;
+            $request->file('file_doc_3')->move($dir, $input_all['file_doc_3']);
+
+            $receipt = ReceiptCompany::find($id);
+            if ($receipt && $receipt->file_doc_3) {
+                \File::delete(public_path('uploads/file_doc_3/' . $receipt->file_doc_3));
+            }
+        }
+
+        $input_all['updated_at'] = date('Y-m-d H:i:s');
+        $input_all['updated_by'] = \Auth::user()->id;
+
+        $validator = Validator::make($request->all(), [
+//                    'name' => 'required',
+        ]);
+
+        $return['title'] = 'อัพโหลดข้อมูล';
 
         if ($validator->fails()) {
             $return['status'] = 0;

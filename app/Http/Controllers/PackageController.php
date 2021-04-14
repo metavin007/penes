@@ -120,7 +120,7 @@ class PackageController extends Controller {
                             return date('d-m-Y H:i:s', strtotime($rec->created_at));
                         })
                         ->editColumn('price', function($rec) {
-                            return number_format($rec->price, 2);
+                            return number_format($rec->price, 0) . "   บาท";
                         })
                         ->addColumn('action', function($rec) {
                             $str = '

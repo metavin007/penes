@@ -11,6 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'น้องจาวา/js')
-    .sass('resources/sass/app.scss', 'น้องจาวา/css')
+mix.js('resources/js/app.js', 'java/js')
+    .sass('resources/sass/app.scss', 'java/css')
     .sourceMaps();

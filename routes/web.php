@@ -21,6 +21,18 @@ Route::resource('user', App\Http\Controllers\UserController::class)->only([
     'index', 'store', 'update', 'destroy'
 ])->name('index', 'user');
 
+// เมนูเดี่ยว
+Route::get('note/get/get_datatable', [App\Http\Controllers\NoteController::class, 'get_datatable']);
+Route::get('note/get/get_by_id/{id}', [App\Http\Controllers\NoteController::class, 'get_by_id']);
+Route::resource('note', App\Http\Controllers\NoteController::class)->only([
+    'index', 'store', 'update', 'destroy'
+])->name('index', 'note');
+
+Route::get('/textbox', function () {
+    return view('text_box');
+})->name('textbox');
+
+
 // ตารางอ้างอิง
 Route::get('package/get/get_datatable', [App\Http\Controllers\PackageController::class, 'get_datatable']);
 Route::get('package/get/get_by_id/{id}', [App\Http\Controllers\PackageController::class, 'get_by_id']);
@@ -64,7 +76,8 @@ Route::resource('receipt', App\Http\Controllers\ReceiptController::class)->only(
 Route::get('receipt_company/get/get_datatable', [App\Http\Controllers\ReceiptCompanyController::class, 'get_datatable']);
 Route::get('receipt_company/get/get_by_id/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'get_by_id']);
 Route::post('receipt_company/update/update_data/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'update_data']);
-Route::post('receipt_company/update/update_upload/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'update_upload']);
+Route::post('receipt_company/update/update_upload_file_doc_2/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'update_upload_file_doc_2']);
+Route::post('receipt_company/update/update_upload_file_doc_3/{id}', [App\Http\Controllers\ReceiptCompanyController::class, 'update_upload_file_doc_3']);
 Route::resource('receipt_company', App\Http\Controllers\ReceiptCompanyController::class)->only([
     'index', 'store', 'update', 'destroy'
 ])->name('index', 'receipt_company');

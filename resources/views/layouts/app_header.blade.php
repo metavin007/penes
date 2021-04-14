@@ -3,8 +3,7 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="">
                 <b>
-                    <img src="{{ asset('images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
-                    <img src="{{ asset('images/logo-light-icon.png') }}" alt="homepage" class="light-logo" />
+                    <img style="width: 70px; padding:5px; " src="{{ asset('images/123logo.png') }}" alt="homepage" class="dark-logo" />
                 </b>
                 <span>
                     <img src="{{ asset('images/logo-text.png') }}" alt="homepage" class="dark-logo" /> 
@@ -15,7 +14,7 @@
         <div class="navbar-collapse">
             <ul class="navbar-nav mr-auto mt-md-0 ">
                 <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="icon-arrow-left-circle"></i></a> </li>      
+                <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="icon-arrow-left-circle"></i></a><span class="text-white">ผู้ใช้งาน : </span><span class="text-white">{{ \Auth::user()->first_name }}  </span>   </li>      
             </ul>
             <ul class="navbar-nav my-lg-0">
                 <li class="nav-item dropdown">

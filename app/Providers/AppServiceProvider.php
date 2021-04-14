@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->app->bind('path.public', function() {
-            return base_path() . '/น้องจาวา';
+            return base_path() . '/java';
         });
     }
 

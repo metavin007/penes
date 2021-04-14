@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
-                            <h4 class="card-title">ตารางแพ็คเกจ</h4>
+                            <h4 class="">ตารางแพ็คเกจ</h4>
                         </div>
                         <div class="col-lg-6">
                             <button class="btn float-right btn-primary btn-add"> สร้าง</button>
@@ -33,7 +33,7 @@
                                     <td class="text-center">ลำดับ</td>
                                     <td class="text-center">ชื่อ</td>
                                     <td class="text-center">ราคา</td>
-                                    <td class="text-center">วันที่เพิ่มข้อมูล</td>
+                                <!--     <td class="text-center">วันที่เพิ่มข้อมูล</td> -->
                                     <td class="text-center">จัดการ</td>
                                 </tr>
                             </thead>
@@ -49,7 +49,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">เพิ่ม</h3>
+                <h3 class="" id="myLargeModalLabel">เพิ่ม</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <form id="FormAdd">
@@ -70,7 +70,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="add_price">ราคา</label>
-                                <input type="number" name="price" id="add_price" class="form-control text-right" required="">
+                                <input type="number" name="price" id="add_price" class="form-control text-right">
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="card-title" id="myLargeModalLabel">แก้ไข</h3>
+                <h3 class="" id="myLargeModalLabel">แก้ไข</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <input type="hidden" id="update_id">
@@ -110,7 +110,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="edit_price">ราคา</label>
-                                <input type="number" name="price" id="edit_price" class="form-control text-right" required="">
+                                <input type="number" name="price" id="edit_price" class="form-control text-right">
                             </div>
                         </div>
                     </div>
@@ -141,11 +141,8 @@
                 targets: "datatable-nosort",
                 orderable: false,
             }],
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "language": {
-            "info": "_START_-_END_ of _TOTAL_ entries",
-            searchPlaceholder: "Search"
-        },
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "ดูทั้งหมด"]],
+        
         "ajax": {
             "url": url_gb + "/package/get/get_datatable",
             "data": function (d) {
@@ -158,7 +155,7 @@
             {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
             {"data": "name"},
             {"data": "price", "className": "text-right"},
-            {"data": "created_at", "className": "text-center"},
+            // {"data": "created_at", "className": "text-center"},
             {"data": "action", "className": "action text-center", "orderable": false, "searchable": false}
         ], "order": [[3, "desc"]],
         rowCallback: function (row, data, index) {
@@ -176,18 +173,12 @@
         rules: {
             name: {
                 required: true,
-            },
-            price: {
-                required: true,
-            },
+            }
         },
         messages: {
             name: {
                 required: "กรุณาระบุ",
-            },
-            price: {
-                required: "กรุณาระบุ",
-            },
+            }
         },
         errorPlacement: function (error, element) { // คำสั่งโชกล่องข้อความ
             error.addClass("help-block");
@@ -255,18 +246,12 @@
         rules: {
             name: {
                 required: true,
-            },
-            price: {
-                required: true,
-            },
+            }
         },
         messages: {
             name: {
                 required: "กรุณาระบุ",
-            },
-            price: {
-                required: "กรุณาระบุ",
-            },
+            }
         },
         errorPlacement: function (error, element) { // คำสั่งโชกล่องข้อความ
             error.addClass("help-block");

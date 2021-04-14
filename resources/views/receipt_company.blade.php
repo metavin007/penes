@@ -10,7 +10,7 @@
     <div class="row page-titles">
         <div class="col-md-6 col-8 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/receipt_company') }}">ตารางจัดเก็บสลิปจ่ายบริษัท</a></li>
+                <!-- <li class="breadcrumb-item"><a href="{{ url('/receipt_company') }}">ตารางเก็บใบเสร็จบริษัท</a></li> -->
             </ol>
         </div>
     </div>
@@ -21,13 +21,13 @@
                     <div class="row"> 
                         <div class="col-lg-2">    
                             <div class="form-group">
-                                <label style="font-weight: bold;"><b>วันที่เริ่ม : </b></label>
+                                <label style="font-weight: bold;"><b>แสดงข้อมูลของวันที่ <i class="me-2 mdi mdi-calendar-clock"></i> </b></label>
                                 <input type="text" id="date_search_start" class="form-control" readonly="" value="{{ date('01-m-Y') }}">
                             </div>
                         </div>
                         <div class="col-lg-2">    
                             <div class="form-group">
-                                <label style="font-weight: bold;"><b>วันที่สิ้นสุด : </b></label>
+                                <label style="font-weight: bold;"><b>จนถึงวันที่ <i class="me-2 mdi mdi-calendar-clock"></i></b></label>
                                 <input type="text" id="date_search_end" class="form-control" readonly="" value="{{ date('t-m-Y') }}">
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-lg-6">
-                            <h4 class="">ตารางจัดเก็บสลิปจ่ายบริษัท</h4>
+                            <h4 class="">ตารางจัดเก็บสลิปใบเสร็จบริษัท</h4>
                         </div>
                         <div class="col-lg-6">
                             <button class="btn float-right btn btn-info btn-add btn-lg"> <i class="me-2 mdi mdi-plus-circle"></i> สร้าง</button>
@@ -54,10 +54,11 @@
                                 <tr>
                                     <td class="text-center" style="width: 5%;">ลำดับ</td>
                                     <td class="text-center" style="width: 25%;">ชื่อลูกค้า/งาน</td>
-                                    <td class="text-center" style="width: 20%;">สลิป</td>
+                                    <td class="text-center" style="width: 20%;">สลิปจ่ายเงิน</td>
                                     <td class="text-center" style="width: 10%;">วันที่</td>
-                                    <td class="text-center" style="width: 15%;">สถานะ</td>
-                                    <td class="text-center" style="width: 10%;">ใบเสร็จ</td>
+                                    <td class="text-center" style="width: 15%;">ใช้บัญชีไหนจ่าย</td>
+                                    <td class="text-center" style="width: 15%;">เอกสารที่มี</td>
+                                    <td class="text-center" style="width: 10%;">ส่งให้ลูกค้า</td>
                                     <td class="text-center" style="width: 20%;">จัดการ</td>
                                 </tr>
                             </thead>
@@ -87,8 +88,8 @@
                         </div>
                         <div class="col-lg-12"> 
                             <div class="form-group">
-                                <label for="add_file"><b>สลิป</b></label>
-                                <input type="file" id="add_file" name="file" class="dropify" data-max-file-size="2M">
+                                <label for="add_file_doc_1"><b>สลิป</b></label>
+                                <input type="file" id="add_file_doc_1" name="file_doc_1" class="dropify" data-max-file-size="2M">
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -99,10 +100,10 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="add_status">สถานะ</label>
+                                <label for="add_status">ใช้บัญชีบุคคลหรือบริษัทจ่าย</label>
                                 <select name="status" id="add_status" class="form-control">
-                                    <option value="" selected="">ไม่ได้กำหนด</option>
-                                    <option value="ขอใบเสร็จ">ขอใบเสร็จ</option>
+                                    <option value="บุคคคลทั่วไป" selected="">บุคคคลทั่วไป</option>
+                                    <option value="บริษัท">บริษัท</option>
                                 </select>
                             </div>
                         </div>
@@ -137,8 +138,8 @@
                         </div>
                         <div class="col-lg-12"> 
                             <div class="form-group">
-                                <label for="edit_file"><b>สลิป</b></label>
-                                <input type="file" id="edit_file" name="file" class="dropify" data-max-file-size="2M" >
+                                <label for="edit_file_doc_1"><b>สลิป</b></label>
+                                <input type="file" id="edit_file_doc_1" name="file_doc_1" class="dropify" data-max-file-size="2M" >
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -149,10 +150,10 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="edit_status">สถานะ</label>
+                                <label for="edit_status">ใช้บัญชีบุคคลหรือบริษัทจ่าย</label>
                                 <select name="status" id="edit_status" class="form-control">
-                                    <option value="" selected="">ไม่ได้กำหนด</option>
-                                    <option value="ขอใบเสร็จ">ขอใบเสร็จ</option>
+                                    <option value="บุคคคลทั่วไป" selected="">บุคคคลทั่วไป</option>
+                                    <option value="บริษัท">บริษัท</option>
                                 </select>
                             </div>
                         </div>
@@ -191,21 +192,49 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalUpload" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalUploadDoc2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="" id="myLargeModalLabel">อัพโหลด</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <input type="hidden" id="update_upload_id">
-            <form id="FormUpload">
+            <input type="hidden" id="update_upload_doc_2_id">
+            <form id="FormUploadDoc2">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12"> 
                             <div class="form-group">
-                                <label for="edit_receipt_file"><b>ใบเสร็จ</b></label>
-                                <input type="file" id="edit_receipt_file" name="receipt_file" class="dropify" data-max-file-size="2M" >
+                                <label for="edit_file_doc_2"><b>ใบเสร็จ</b></label>
+                                <input type="file" id="edit_file_doc_2" name="file_doc_2" class="dropify" data-max-file-size="2M" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-success">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalUploadDoc3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="" id="myLargeModalLabel">อัพโหลด</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <input type="hidden" id="update_upload_doc_3_id">
+            <form id="FormUploadDoc3">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12"> 
+                            <div class="form-group">
+                                <label for="edit_file_doc_3"><b>ใบเสร็จ</b></label>
+                                <input type="file" id="edit_file_doc_3" name="file_doc_3" class="dropify" data-max-file-size="2M" >
                             </div>
                         </div>
                     </div>
@@ -270,11 +299,8 @@
                     orderable: false,
                 }],
             pageLength: 50,
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "language": {
-                "info": "_START_-_END_ of _TOTAL_ entries",
-                searchPlaceholder: "Search"
-            },
+            "lengthMenu": [[50, -1], [50, "ทั้งหมด"]],
+
             "ajax": {
                 "url": url_gb + "/receipt_company/get/get_datatable",
                 "data": function (d) {
@@ -285,26 +311,15 @@
             "columns": [
                 {"data": "DT_RowIndex", "className": "text-center", "orderable": false, "searchable": false},
                 {"data": "name", "orderable": false, },
-                {"data": "file", "className": "text-center", "orderable": false, },
+                {"data": "file_doc_1", "className": "text-center", "orderable": false, },
                 {"data": "receipt_date", "className": "text-center"},
                 {"data": "status", "className": "text-center"},
-                {"data": "receipt_file", "className": "text-center"},
+                {"data": "file_doc_2", "className": "text-center"},
+                {"data": "file_doc_3", "className": "text-center"},
                 {"data": "action", "className": "action text-right", "orderable": false, "searchable": false}
             ], "order": [[3, "desc"]],
             rowCallback: function (row, data, index) {
 
-            },
-            //แก้ไขชื่อ ข้อความต่างๆ ;
-            "language": {
-                "search": "ค้นหา",
-
-                "paginate": {
-                    "first": "หน้าแรก",
-                    "previous": "ก่อนหน้า",
-                    "next": "ต่อไป",
-                    "last": "สุดท้าย"
-                },
-                "processing": "Processing...",
             }
         });
     }
@@ -323,8 +338,8 @@
             $(this).val(picker.startDate.format('DD-MM-YYYY'));
         });
 
-        $('#add_file').parent().find(".dropify-clear").trigger('click');
-        $('#add_file').dropify();
+        $('#add_file_doc_1').parent().find(".dropify-clear").trigger('click');
+        $('#add_file_doc_1').dropify();
 
         $('#ModalAdd').modal("show");
     });
@@ -400,7 +415,7 @@
             dataType: 'json'
         }).done(function (rec) {
 
-            $('#open_file').attr('src', asset_gb + 'uploads/receipt_company/' + rec['receipt'].file)
+            $('#open_file').attr('src', asset_gb + 'uploads/file_doc_1/' + rec['receipt'].file_doc_1)
 
             btn.button("reset");
             $('#ModalLook').modal("show");
@@ -437,14 +452,14 @@
 
             $('#edit_name').val(rec['receipt'].name);
 
-            var drEvent = $('#edit_file').dropify(
+            var drEvent = $('#edit_file_doc_1').dropify(
                     {
-                        efaultFile: asset_gb + 'uploads/receipt_company/' + rec['receipt'].file
+                        efaultFile: asset_gb + 'uploads/file_doc_1/' + rec['receipt'].file_doc_1
                     });
             drEvent = drEvent.data('dropify');
             drEvent.resetPreview();
             drEvent.clearElement();
-            drEvent.settings.defaultFile = asset_gb + 'uploads/receipt_company/' + rec['receipt'].file;
+            drEvent.settings.defaultFile = asset_gb + 'uploads/file_doc_1/' + rec['receipt'].file_doc_1;
             drEvent.destroy();
             drEvent.init();
 
@@ -553,40 +568,69 @@
         });
     });
 
-    $('body').on('click', '.btn-upload', function (e) {
+    $('body').on('click', '.btn-upload_doc_2', function (e) {
         e.preventDefault();
         var btn = $(this);
         btn.button('loading');
         var id = $(this).data('id');
-        $('#update_upload_id').val(id);
+        $('#update_upload_doc_2_id').val(id);
 
         $.ajax({
             method: "GET",
             url: url_gb + "/receipt_company/get/get_by_id/" + id,
             dataType: 'json'
         }).done(function (rec) {
-
-
-            var drEvent = $('#edit_receipt_file').dropify(
+            var drEvent = $('#edit_file_doc_2').dropify(
                     {
-                        efaultFile: asset_gb + 'uploads/receipt_company_file/' + rec['receipt'].receipt_file
+                        efaultFile: asset_gb + 'uploads/file_doc_2/' + rec['receipt'].file_doc_2
                     });
             drEvent = drEvent.data('dropify');
             drEvent.resetPreview();
             drEvent.clearElement();
-            drEvent.settings.defaultFile = asset_gb + 'uploads/receipt_company_file/' + rec['receipt'].receipt_file;
+            drEvent.settings.defaultFile = asset_gb + 'uploads/file_doc_2/' + rec['receipt'].file_doc_2;
             drEvent.destroy();
             drEvent.init();
 
             btn.button("reset");
-            $('#ModalUpload').modal("show");
+            $('#ModalUploadDoc2').modal("show");
         }).fail(function () {
             swal("system.system_alert", "system.system_error", "error");
             btn.button("reset");
         });
     });
 
-    $('#FormUpload').validate({
+    $('body').on('click', '.btn-upload_doc_3', function (e) {
+        e.preventDefault();
+        var btn = $(this);
+        btn.button('loading');
+        var id = $(this).data('id');
+        $('#update_upload_doc_3_id').val(id);
+
+        $.ajax({
+            method: "GET",
+            url: url_gb + "/receipt_company/get/get_by_id/" + id,
+            dataType: 'json'
+        }).done(function (rec) {
+            var drEvent = $('#edit_file_doc_3').dropify(
+                    {
+                        efaultFile: asset_gb + 'uploads/file_doc_3/' + rec['receipt'].file_doc_3
+                    });
+            drEvent = drEvent.data('dropify');
+            drEvent.resetPreview();
+            drEvent.clearElement();
+            drEvent.settings.defaultFile = asset_gb + 'uploads/file_doc_3/' + rec['receipt'].file_doc_3;
+            drEvent.destroy();
+            drEvent.init();
+
+            btn.button("reset");
+            $('#ModalUploadDoc3').modal("show");
+        }).fail(function () {
+            swal("system.system_alert", "system.system_error", "error");
+            btn.button("reset");
+        });
+    });
+
+    $('#FormUploadDoc2').validate({
         rules: {
 
         },
@@ -607,11 +651,11 @@
         },
         submitHandler: function (form) {
             var btn = $(form).find('[type="submit"]');
-            var id = $('#update_upload_id').val();
+            var id = $('#update_upload_doc_2_id').val();
             btn.button("loading");
             $.ajax({
                 method: "POST",
-                url: url_gb + "/receipt_company/update/update_upload/" + id,
+                url: url_gb + "/receipt_company/update/update_upload_file_doc_2/" + id,
                 dataType: 'json',
                 data: new FormData(form),
                 contentType: false,
@@ -623,7 +667,7 @@
                     TableList.api().ajax.reload();
                     form.reset();
                     swal(rec.title, rec.content, "success");
-                    $('#ModalUpload').modal('hide');
+                    $('#ModalUploadDoc2').modal('hide');
                 } else {
                     swal(rec.title, rec.content, "error");
                 }
@@ -634,6 +678,53 @@
         }
     });
 
+    $('#FormUploadDoc3').validate({
+        rules: {
+
+        },
+        messages: {
+
+        },
+        errorPlacement: function (error, element) { // คำสั่งโชกล่องข้อความ
+            error.addClass("help-block");
+            error.insertAfter(element);
+        },
+        highlight: function (element, errorClass, validClass) { // ใส่สีเมื่อเกิด error
+            $(element).closest('.form-group').addClass("has-danger");
+            $(element).addClass("form-control-danger");
+        },
+        unhighlight: function (element, errorClass, validClass) { // ใส่สีเมื่อผ่าน error แล้ว;
+            $(element).closest(".form-group").removeClass("has-danger");
+            $(element).removeClass("form-control-danger");
+        },
+        submitHandler: function (form) {
+            var btn = $(form).find('[type="submit"]');
+            var id = $('#update_upload_doc_3_id').val();
+            btn.button("loading");
+            $.ajax({
+                method: "POST",
+                url: url_gb + "/receipt_company/update/update_upload_file_doc_3/" + id,
+                dataType: 'json',
+                data: new FormData(form),
+                contentType: false,
+                cache: false,
+                processData: false,
+            }).done(function (rec) {
+                btn.button("reset");
+                if (rec.status == 1) {
+                    TableList.api().ajax.reload();
+                    form.reset();
+                    swal(rec.title, rec.content, "success");
+                    $('#ModalUploadDoc3').modal('hide');
+                } else {
+                    swal(rec.title, rec.content, "error");
+                }
+            }).fail(function () {
+                swal("Error", "System error", "error");
+                btn.button("reset");
+            });
+        }
+    });
 
 
 </script>
